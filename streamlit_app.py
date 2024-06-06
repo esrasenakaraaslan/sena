@@ -56,7 +56,7 @@ if st.button("Analiz"):
     st.markdown('<div style="background-color: #9b59b6; padding: 20px; border-radius: 10px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);"><p style="color: #f4d03f;">Burada veri analizi işlevi gelecek.</p></div>', unsafe_allow_html=True)
 
 if st.button("Grafikler"):
-    st.markdown('<div style="background-color: #9b59b6; padding: 20px; border-radius: 10px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);"><p style="color: #f4d03f;">Burada grafikler çizme işlevi gelecek.</p></div>', unsafe_allow_html=True)
+    st.markdown('<div style="background-color: #9b59b6; padding: 20px; border-radius: 10px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);"><p style="color: #f4d03f;"></p></div>', unsafe_allow_html=True)
     
     # Grafik çizme işlevi
     def draw_bar_chart(data):
