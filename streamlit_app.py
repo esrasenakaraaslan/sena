@@ -74,13 +74,13 @@ if st.button("Grafikler"):
         top_locations = df['Konum'].value_counts().head(5)
         st.bar_chart(top_locations)
 
-        # Çalışma Şekli Grafiği
+    if st.button("Çalışma Şekli Grafiği"):
         st.markdown('<div style="background-color: #9b59b6; padding: 20px; border-radius: 10px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);"><p style="color: #f4d03f;">Çalışma şekli sütunu</p></div>', unsafe_allow_html=True)
         # Çubuk grafiği çizme işlevi
         calisma_sekli_sayilari = df['çalışma şekli'].value_counts()
         st.bar_chart(calisma_sekli_sayilari)
       
-        # Pozisyon Grafiği
+    if st.button("Pozisyon Grafiği"):
         st.markdown('<div style="background-color: #9b59b6; padding: 20px; border-radius: 10px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);"><p style="color: #f4d03f;">Pozisyon sütununda en çok tekrar eden 20 pozisyon</p></div>', unsafe_allow_html=True)
         # Çubuk grafiği çizme işlevi
         top_positions = df['Pozisyon'].value_counts().head(20)
@@ -107,6 +107,7 @@ if st.button("Grafikler"):
     plt.xlabel('Pozisyon')
     plt.ylabel('Konum')
     st.pyplot(plt)
+
 
 if st.button("İşveren Girişi", key="isveren_girisi_button"):
     st.markdown('<div style="background-color: #9b59b6; padding: 20px; border-radius: 10px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);"><p style="color: #f4d03f;">Burada işveren giriş işlevi gelecek.</p></div>', unsafe_allow_html=True)
