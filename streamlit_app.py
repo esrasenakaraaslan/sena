@@ -17,8 +17,7 @@ st.markdown('<h1 style="color: #9b59b6; text-align: center;">FreshData İş İla
 url = "https://github.com/esrasenakaraaslan/web_sitesi/raw/main/.devcontainer/t%C3%BCm_veriler_d%C3%BCzenlenmi%C5%9F_y%C4%B1ll%C4%B1%20(4).xlsx"
 response = requests.get(url)
 file = BytesIO(response.content)
-df = pd.read_excel(file)
-st.dataframe(df)
+
 # Excel dosyasını yükleyip okuma
 @st.cache
 def load_data(url):
