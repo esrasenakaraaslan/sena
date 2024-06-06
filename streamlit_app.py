@@ -1,6 +1,6 @@
 import streamlit as st
 import pandas as pd
-
+import seaborn as sns
 
 import requests
 from io import BytesIO
@@ -74,11 +74,31 @@ if st.button("Grafikler"):
     st.bar_chart(calisma_sekli_sayilari)
   
     # Pozisyon Grafiği
-    st.markdown('<div style="background-color: #9b59b6; padding: 20px; border-radius: 10px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);"><p style="color: #f4d03f;">Pozisyon sütununda en çok tekrar eden 20 pozisyonu çubuk grafiğine dök.</p></div>', unsafe_allow_html=True)
+    st.markdown('<div style="background-color: #9b59b6; padding: 20px; border-radius: 10px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);"><p style="color: #f4d03f;">Pozisyon sütununda en çok tekrar eden 20 pozisyon</p></div>', unsafe_allow_html=True)
     # Çubuk grafiği çizme işlevi
     top_positions = df['Pozisyon'].value_counts().head(20)
     st.bar_chart(top_positions)
+    # En çok tekrar eden konumlar ve pozisyonlar
+en_cok_tekrar_edilen_konumlar = is_ilanlari['Konum'].value_counts().head(10).index
+en_cok_tekrar_edilen_pozisyonlar = is_ilanlari['Pozisyon'].value_counts().head(10).index
 
+# Filtrelenmiş veri
+filtrelenmis_veri = is_ilanlari[
+    is_ilanlari['Konum'].isin(en_cok_tekrar_edilen_konumlar) & 
+    is_ilanlari['Pozisyon'].isin(en_cok_tekrar_edilen_pozisyonlar)
+]
+
+# Çapraz tablo oluştur
+cross_table = pd.crosstab(index=filtrelenmis_veri['Konum'], columns=filtrelenmis_veri['Pozisyon'])
+
+# Streamlit ile görselleştirme
+st.write("En Çok Tekrar Edilen İlk 10 Konum ve Pozisyon İlişkisi Heatmap")
+plt.figure(figsize=(10, 6))
+sns.heatmap(cross_table, cmap='rainbow', annot=True, fmt='d', linewidths=.5)
+plt.title('En Çok Tekrar Edilen İlk 10 Konum ve Pozisyon İlişkisi Heatmap')
+plt.xlabel('Pozisyon')
+plt.ylabel('Konum')
+st.pyplot(plt)
 
 if st.button("İşveren Girişi", key="isveren_girisi_button"):
     st.markdown('<div style="background-color: #9b59b6; padding: 20px; border-radius: 10px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);"><p style="color: #f4d03f;">Burada işveren giriş işlevi gelecek.</p></div>', unsafe_allow_html=True)
