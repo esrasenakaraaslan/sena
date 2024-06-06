@@ -1,17 +1,16 @@
 import streamlit as st
 import pandas as pd
 import seaborn as sns
+import matplotlib.pyplot as plt
 
 import requests
 from io import BytesIO
-import openpyxl
 
 # Uygulama ayarları
 st.set_page_config(page_title="FreshData", page_icon=":rocket:", layout="wide")
 
 # Başlık
 st.markdown('<h1 style="color: #9b59b6; text-align: center;">FreshData İş İlanı Sitesi</h1>', unsafe_allow_html=True)
-
 
 # GitHub'daki Excel dosyasının URL'si
 url = "https://github.com/esrasenakaraaslan/web_sitesi/raw/main/.devcontainer/t%C3%BCm_veriler_d%C3%BCzenlenmi%C5%9F_y%C4%B1ll%C4%B1%20(4).xlsx"
@@ -29,21 +28,6 @@ df = load_data(url)
 # Streamlit ile veriyi görüntüleme
 st.write("Dosya İçeriği:")
 st.write(df)
-# Arka plan rengi ve site ismi rengi
-st.markdown(
-    """
-    <style>
-    .stApp {
-        background-color: #aed6f1; /* Arka plan rengi */
-    }
-    .stButton>button {
-        color: #f4d03f; /* Buton içindeki yazı rengi (sarı) */
-        background-color: #9b59b6; /* Buton rengi (mor) */
-    }
-    </style>
-    """,
-    unsafe_allow_html=True
-)
 
 # İşlev butonları ve içerikleri
 if st.button("İş Bul", key="iş_bul_button"):
@@ -78,14 +62,8 @@ if st.button("Grafikler"):
     # Çubuk grafiği çizme işlevi
     top_positions = df['Pozisyon'].value_counts().head(20)
     st.bar_chart(top_positions)
-    is_ilanlari = pd.read_excel(url)  # url değişkeni daha önce tanımlanmıştı
 
-# Daha önceki kodun devamı
 # En çok tekrar eden konumlar ve pozisyonlar
-en_cok_tekrar_edilen_konumlar = df['Konum'].value_counts().head(10).index
-en_cok_tekrar_edilen_pozisyonlar = df['Pozisyon'].value_counts().head(10).index
-
-    # En çok tekrar eden konumlar ve pozisyonlar
 en_cok_tekrar_edilen_konumlar = is_ilanlari['Konum'].value_counts().head(10).index
 en_cok_tekrar_edilen_pozisyonlar = is_ilanlari['Pozisyon'].value_counts().head(10).index
 
