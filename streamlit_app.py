@@ -9,6 +9,28 @@ from io import BytesIO
 # Uygulama ayarları
 st.set_page_config(page_title="FreshData", page_icon=":rocket:", layout="wide")
 
+# CSS stil tanımları
+st.markdown(
+    """
+    <style>
+        /* Arka plan rengi */
+        body {
+            background-color: #aed6f1;
+        }
+        /* Butonların rengi */
+        .stButton>button {
+            background-color: #9b59b6;
+            color: #f4d03f;
+        }
+        /* Butonların üstündeki metin rengi */
+        .stButton>button div div {
+            color: #f4d03f;
+        }
+    </style>
+    """,
+    unsafe_allow_html=True
+)
+
 # Başlık
 st.markdown('<h1 style="color: #9b59b6; text-align: center;">FreshData İş İlanı Sitesi</h1>', unsafe_allow_html=True)
 
