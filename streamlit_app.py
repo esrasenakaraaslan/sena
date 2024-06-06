@@ -63,15 +63,6 @@ if st.button("Grafikler"):
     # Grafik çizme işlevi
     def draw_seaborn_chart(data):
         konum_sayilari = data['Konum'].value_counts()
-        plt.figure(figsize=(10, 6))
-        sns.barplot(x=konum_sayilari.index, y=konum_sayilari.values, palette="viridis")
-        plt.title('Konumların Sayısı')
-        plt.xlabel('Konumlar')
-        plt.ylabel('Sayı')
-        plt.xticks(rotation=90)
-        st.pyplot(plt)
- def draw_seaborn_chart(data):
-        konum_sayilari = data['Konum'].value_counts()
         filtre = konum_sayilari / len(data) * 100 < 5
         filtrelenmis_konum_sayilari = konum_sayilari[~filtre]
 
@@ -108,10 +99,6 @@ if st.button("Hakkımızda"):
     ## Bilişim Sektöründe Gelecek: Veri Analizi ve İş İlanları
     ...
     ''')
-
-# Footer
-st.markdown('<p style="text-align: center; font-size: 12px; color: #888;">© 2024 FreshData. Tüm hakları saklıdır.</p>', unsafe_allow_html=True)
-
 
 # Footer
 st.markdown('<p style="text-align: center; font-size: 12px; color: #888;">© 2024 FreshData. Tüm hakları saklıdır.</p>', unsafe_allow_html=True)
