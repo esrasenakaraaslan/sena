@@ -60,20 +60,20 @@ if st.button("Analiz"):
 
 if st.button("Grafikler"):
     st.markdown('<div style="background-color: #9b59b6; padding: 20px; border-radius: 10px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);"><p style="color: #f4d03f;">Burada grafikler çizme işlevi gelecek.</p></div>', unsafe_allow_html=True)
- # Grafik çizme işlevi
-    def draw_bar_chart(data):
-        # Konum sütununda en çok tekrar eden 5 değeri bul
-        top_locations = data['Konum'].value_counts().head(5)
-
-        # Bar chart oluştur
+    
+    # Konum Grafiği butonu
+    if st.button("Konum Grafiği", key="konum_grafik_button"):
+        st.markdown('<div style="background-color: #9b59b6; padding: 20px; border-radius: 10px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);"><p style="color: #f4d03f;">Konum sütununda en çok tekrar eden 5 konumu çubuk grafiğine dök.</p></div>', unsafe_allow_html=True)
+        # Çubuk grafiği çizme işlevi
+        top_locations = df['Konum'].value_counts().head(5)
         st.bar_chart(top_locations)
 
-   
-
-    # Verinin varlığını kontrol etme
-    if data is not None:
-        # Grafikleri çizme işlevini çağırma
-        draw_bar_chart(data)   
+    # Çalışma Şekli Grafiği butonu
+    if st.button("Çalışma Şekli Grafiği", key="calisma_sekli_grafik_button"):
+        st.markdown('<div style="background-color: #9b59b6; padding: 20px; border-radius: 10px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);"><p style="color: #f4d03f;">Çalışma şekli sütununda en çok tekrar edenleri çubuk grafiğine dök.</p></div>', unsafe_allow_html=True)
+        # Çubuk grafiği çizme işlevi
+        calisma_sekli_sayilari = df['Çalışma Şekli'].value_counts()
+        st.bar_chart(calisma_sekli_sayilari)
 
 if st.button("İşveren Girişi", key="isveren_girisi_button"):
     st.markdown('<div style="background-color: #9b59b6; padding: 20px; border-radius: 10px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);"><p style="color: #f4d03f;">Burada işveren giriş işlevi gelecek.</p></div>', unsafe_allow_html=True)
