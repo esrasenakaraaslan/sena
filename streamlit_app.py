@@ -60,19 +60,29 @@ if st.button("Analiz"):
 if st.button("Grafikler"):
     st.markdown('<div style="background-color: #9b59b6; padding: 20px; border-radius: 10px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);"><p style="color: #f4d03f;">Burada grafikler çizme işlevi gelecek.</p></div>', unsafe_allow_html=True)
     
-    # Grafik çizme işlevi
-    def draw_seaborn_chart(data):
-        konum_sayilari = data['Konum'].value_counts()
-        filtre = konum_sayilari / len(data) * 100 < 5
-        filtrelenmis_konum_sayilari = konum_sayilari[~filtre]
-
+   if st.button("Konum Grafiği", key="konum_grafik_button"):
+        st.markdown('<div style="background-color: #9b59b6; padding: 20px; border-radius: 10px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);"><p style="color: #f4d03f;">Konum sütununda en çok tekrar eden 10 konumu çubuk grafiğine dök.</p></div>', unsafe_allow_html=True)
+        # Çubuk grafiği çizme işlevi
+        konum_sayilari = df['Konum'].value_counts().head(10)
         plt.figure(figsize=(10, 6))
-        sns.barplot(x=filtrelenmis_konum_sayilari.index, y=filtrelenmis_konum_sayilari.values, palette="viridis")
-        plt.title('Konumların Sayısı (Yüzde 5\'ten fazla olanlar)')
+        sns.barplot(x=konum_sayilari.index, y=konum_sayilari.values, palette="viridis")
+        plt.title('Konumların Sayısı')
         plt.xlabel('Konumlar')
         plt.ylabel('Sayı')
-        plt.xticks(rotation=90)
-        st.pyplot(plt)        
+        plt.xticks(rotation=45)
+        st.pyplot(plt)
+
+    if st.button("Çalışma Şekli Grafiği", key="calisma_sekli_grafik_button"):
+        st.markdown('<div style="background-color: #9b59b6; padding: 20px; border-radius: 10px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);"><p style="color: #f4d03f;">Çalışma şekli sütununda en çok tekrar edenleri çubuk grafiğine dök.</p></div>', unsafe_allow_html=True)
+        # Çubuk grafiği çizme işlevi
+        calisma_sekli_sayilari = df['Çalışma Şekli'].value_counts()
+        plt.figure(figsize=(10, 6))
+        sns.barplot(x=calisma_sekli_sayilari.index, y=calisma_sekli_sayilari.values, palette="viridis")
+        plt.title('Çalışma Şeklinin Dağılımı')
+        plt.xlabel('Çalışma Şekli')
+        plt.ylabel('Sayı')
+        plt.xticks(rotation=45)
+        st.pyplot(plt)
 
     # Verinin varlığını kontrol etme
     if df is not None:
