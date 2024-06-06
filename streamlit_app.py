@@ -67,47 +67,27 @@ if st.button("Analiz"):
 if st.button("Grafikler"):
     st.markdown('<div style="background-color: #9b59b6; padding: 20px; border-radius: 10px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);"><p style="color: #f4d03f;">Projemizdeki grafiklerimiz:</p></div>', unsafe_allow_html=True)
     
-    if st.button("Konum Sütunu Grafik"):
-        # Konum Grafiği
-        st.markdown('<div style="background-color: #9b59b6; padding: 20px; border-radius: 10px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);"><p style="color: #f4d03f;">Konum sütununda en çok tekrar eden 5 konum</p></div>', unsafe_allow_html=True)
-        # Çubuk grafiği çizme işlevi
-        top_locations = df['Konum'].value_counts().head(5)
-        st.bar_chart(top_locations)
+    # Grafiklerin altında buton ekleme
+    if st.button("Grafiklere Git", key="grafiklere_git_button"):
+        st.write("Grafikler")
+        if st.button("Konum Sütunu Grafik"):
+            # Konum Grafiği
+            st.markdown('<div style="background-color: #9b59b6; padding: 20px; border-radius: 10px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);"><p style="color: #f4d03f;">Konum sütununda en çok tekrar eden 5 konum</p></div>', unsafe_allow_html=True)
+            # Çubuk grafiği çizme işlevi
+            top_locations = df['Konum'].value_counts().head(5)
+            st.bar_chart(top_locations)
 
-    if st.button("Çalışma Şekli Sütunu Grafik"):
-        st.markdown('<div style="background-color: #9b59b6; padding: 20px; border-radius: 10px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);"><p style="color: #f4d03f;">Çalışma şekli sütunu</p></div>', unsafe_allow_html=True)
-        # Çubuk grafiği çizme işlevi
-        calisma_sekli_sayilari = df['çalışma şekli'].value_counts()
-        st.bar_chart(calisma_sekli_sayilari)
-      
-    if st.button("Pozisyon Sütunu Grafik"):
-        st.markdown('<div style="background-color: #9b59b6; padding: 20px; border-radius: 10px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);"><p style="color: #f4d03f;">Pozisyon sütununda en çok tekrar eden 20 pozisyon</p></div>', unsafe_allow_html=True)
-        # Çubuk grafiği çizme işlevi
-        top_positions = df['Pozisyon'].value_counts().head(20)
-        st.bar_chart(top_positions)
-
-    # En çok tekrar eden konumlar ve pozisyonlar
-    en_cok_tekrar_edilen_konumlar = df['Konum'].value_counts().head(10).index
-    en_cok_tekrar_edilen_pozisyonlar = df['Pozisyon'].value_counts().head(10).index
-
-    # Filtrelenmiş veri
-    filtrelenmis_veri = df[
-        df['Konum'].isin(en_cok_tekrar_edilen_konumlar) & 
-        df['Pozisyon'].isin(en_cok_tekrar_edilen_pozisyonlar)
-    ]
-
-    # Çapraz tablo oluştur
-    cross_table = pd.crosstab(index=filtrelenmis_veri['Konum'], columns=filtrelenmis_veri['Pozisyon'])
-
-    # Streamlit ile görselleştirme
-    st.write("En Çok Tekrar Edilen İlk 10 Konum ve Pozisyon İlişkisi Heatmap")
-    plt.figure(figsize=(10, 6))
-    sns.heatmap(cross_table, cmap='rainbow', annot=True, fmt='d', linewidths=.5)
-    plt.title('En Çok Tekrar Edilen İlk 10 Konum ve Pozisyon İlişkisi Heatmap')
-    plt.xlabel('Pozisyon')
-    plt.ylabel('Konum')
-    st.pyplot(plt)
-
+        if st.button("Çalışma Şekli Sütunu Grafik"):
+            st.markdown('<div style="background-color: #9b59b6; padding: 20px; border-radius: 10px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);"><p style="color: #f4d03f;">Çalışma şekli sütunu</p></div>', unsafe_allow_html=True)
+            # Çubuk grafiği çizme işlevi
+            calisma_sekli_sayilari = df['çalışma şekli'].value_counts()
+            st.bar_chart(calisma_sekli_sayilari)
+          
+        if st.button("Pozisyon Sütunu Grafik"):
+            st.markdown('<div style="background-color: #9b59b6; padding: 20px; border-radius: 10px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);"><p style="color: #f4d03f;">Pozisyon sütununda en çok tekrar eden 20 pozisyon</p></div>', unsafe_allow_html=True)
+            # Çubuk grafiği çizme işlevi
+            top_positions = df['Pozisyon'].value_counts().head(20)
+            st.bar_chart(top_positions)
 
 if st.button("İşveren Girişi", key="isveren_girisi_button"):
     st.markdown('<div style="background-color: #9b59b6; padding: 20px; border-radius: 10px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);"><p style="color: #f4d03f;">Burada işveren giriş işlevi gelecek.</p></div>', unsafe_allow_html=True)
@@ -135,4 +115,3 @@ if st.button("Hakkımızda"):
 
 # Footer
 st.markdown('<p style="text-align: center; font-size: 12px; color: #888;">© 2024 FreshData. Tüm hakları saklıdır.</p>', unsafe_allow_html=True)
-
