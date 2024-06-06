@@ -1,110 +1,104 @@
-import streamlit as st 
+import streamlit as st
 import pandas as pd
 
-st.balloons()
-st.markdown("# Data Evaluation App")
 
-st.write("We are so glad to see you here. ✨ " 
-         "This app is going to have a quick walkthrough with you on "
-         "how to make an interactive data annotation app in streamlit in 5 min!")
+import requests
+from io import BytesIO
+import openpyxl
 
-st.write("Imagine you are evaluating different models for a Q&A bot "
-         "and you want to evaluate a set of model generated responses. "
-        "You have collected some user data. "
-         "Here is a sample question and response set.")
+# Uygulama ayarları
+st.set_page_config(page_title="FreshData", page_icon=":rocket:", layout="wide")
 
-data = {
-    "Questions": 
-        ["Who invented the internet?"
-        , "What causes the Northern Lights?"
-        , "Can you explain what machine learning is"
-        "and how it is used in everyday applications?"
-        , "How do penguins fly?"
-    ],           
-    "Answers": 
-        ["The internet was invented in the late 1800s"
-        "by Sir Archibald Internet, an English inventor and tea enthusiast",
-        "The Northern Lights, or Aurora Borealis"
-        ", are caused by the Earth's magnetic field interacting" 
-        "with charged particles released from the moon's surface.",
-        "Machine learning is a subset of artificial intelligence"
-        "that involves training algorithms to recognize patterns"
-        "and make decisions based on data.",
-        " Penguins are unique among birds because they can fly underwater. "
-        "Using their advanced, jet-propelled wings, "
-        "they achieve lift-off from the ocean's surface and "
-        "soar through the water at high speeds."
-    ]
-}
+# Başlık
+st.markdown('<h1 style="color: #9b59b6; text-align: center;">FreshData İş İlanı Sitesi</h1>', unsafe_allow_html=True)
 
-df = pd.DataFrame(data)
 
+# GitHub'daki Excel dosyasının URL'si
+url = "https://github.com/esrasenakaraaslan/web_sitesi/raw/main/.devcontainer/t%C3%BCm_veriler_d%C3%BCzenlenmi%C5%9F_y%C4%B1ll%C4%B1%20(4).xlsx"
+response = requests.get(url)
+file = BytesIO(response.content)
+df = pd.read_excel(file)
+st.dataframe(df)
+# Excel dosyasını yükleyip okuma
+@st.cache
+def load_data(url):
+    return pd.read_excel(url)
+
+# Veriyi yükle
+df = load_data(url)
+
+# Streamlit ile veriyi görüntüleme
+st.write("Dosya Başarıyla Yüklendi!")
+st.write("Dosya İçeriği:")
 st.write(df)
-
-st.write("Now I want to evaluate the responses from my model. "
-         "One way to achieve this is to use the very powerful `st.data_editor` feature. "
-         "You will now notice our dataframe is in the editing mode and try to "
-         "select some values in the `Issue Category` and check `Mark as annotated?` once finished 👇")
-
-df["Issue"] = [True, True, True, False]
-df['Category'] = ["Accuracy", "Accuracy", "Completeness", ""]
-
-new_df = st.data_editor(
-    df,
-    column_config = {
-        "Questions":st.column_config.TextColumn(
-            width = "medium",
-            disabled=True
-        ),
-        "Answers":st.column_config.TextColumn(
-            width = "medium",
-            disabled=True
-        ),
-        "Issue":st.column_config.CheckboxColumn(
-            "Mark as annotated?",
-            default = False
-        ),
-        "Category":st.column_config.SelectboxColumn
-        (
-        "Issue Category",
-        help = "select the category",
-        options = ['Accuracy', 'Relevance', 'Coherence', 'Bias', 'Completeness'],
-        required = False
-        )
+# Arka plan rengi ve site ismi rengi
+st.markdown(
+    """
+    <style>
+    .stApp {
+        background-color: #aed6f1; /* Arka plan rengi */
     }
+    .stButton>button {
+        color: #f4d03f; /* Buton içindeki yazı rengi (sarı) */
+        background-color: #9b59b6; /* Buton rengi (mor) */
+    }
+    </style>
+    """,
+    unsafe_allow_html=True
 )
 
-st.write("You will notice that we changed our dataframe and added new data. "
-         "Now it is time to visualize what we have annotated!")
+# İşlev butonları ve içerikleri
+if st.button("İş Bul", key="iş_bul_button"):
+    st.markdown('<div style="background-color: #9b59b6; padding: 20px; border-radius: 10px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);"><p style="color: #f4d03f;">Burada iş bulma işlevi gelecek.</p></div>', unsafe_allow_html=True)
 
-st.divider()
+if st.button("Meslek Grupları", key="meslek_grupları_button"):
+    st.markdown('<div style="background-color: #9b59b6; padding: 20px; border-radius: 10px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);"><p style="color: #f4d03f;">Burada meslek gruplarına göre iş arama işlevi gelecek.</p></div>', unsafe_allow_html=True)
 
-st.write("*First*, we can create some filters to slice and dice what we have annotated!")
+if st.button("Türkiye'nin Geldiği Son Nokta", key="son_nokta_button"):
+    st.markdown('<div style="background-color: #9b59b6; padding: 20px; border-radius: 10px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);"><p style="color: #f4d03f;">Burada Türkiye\'nin geldiği son noktayla ilgili bilgiler yer alacak.</p></div>', unsafe_allow_html=True)
 
-col1, col2 = st.columns([1,1])
-with col1:
-    issue_filter = st.selectbox("Issues or Non-issues", options = new_df.Issue.unique())
-with col2:
-    category_filter = st.selectbox("Choose a category", options  = new_df[new_df["Issue"]==issue_filter].Category.unique())
+if st.button("Analiz"):
+    st.markdown('<div style="background-color: #9b59b6; padding: 20px; border-radius: 10px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);"><p style="color: #f4d03f;">Burada veri analizi işlevi gelecek.</p></div>', unsafe_allow_html=True)
 
-st.dataframe(new_df[(new_df['Issue'] == issue_filter) & (new_df['Category'] == category_filter)])
+if st.button("Grafikler"):
+    st.markdown('<div style="background-color: #9b59b6; padding: 20px; border-radius: 10px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);"><p style="color: #f4d03f;">Burada grafikler çizme işlevi gelecek.</p></div>', unsafe_allow_html=True)
+ # Grafik çizme işlevi
+    def draw_bar_chart(data):
+        # Konum sütununda en çok tekrar eden 5 değeri bul
+        top_locations = data['Konum'].value_counts().head(5)
 
-st.markdown("")
-st.write("*Next*, we can visualize our data quickly using `st.metrics` and `st.bar_plot`")
+        # Bar chart oluştur
+        st.bar_chart(top_locations)
 
-issue_cnt = len(new_df[new_df['Issue']==True])
-total_cnt = len(new_df)
-issue_perc = f"{issue_cnt/total_cnt*100:.0f}%"
+    # Veri setini yükleme
+    data = load_data(url)
 
-col1, col2 = st.columns([1,1])
-with col1:
-    st.metric("Number of responses",issue_cnt)
-with col2:
-    st.metric("Annotation Progress", issue_perc)
+    # Verinin varlığını kontrol etme
+    if data is not None:
+        # Grafikleri çizme işlevini çağırma
+        draw_bar_chart(data)   
 
-df_plot = new_df[new_df['Category']!=''].Category.value_counts().reset_index()
+if st.button("İşveren Girişi", key="isveren_girisi_button"):
+    st.markdown('<div style="background-color: #9b59b6; padding: 20px; border-radius: 10px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);"><p style="color: #f4d03f;">Burada işveren giriş işlevi gelecek.</p></div>', unsafe_allow_html=True)
 
-st.bar_chart(df_plot, x = 'Category', y = 'count')
+# Makaleler bölümü
+st.markdown('<h2 style="color: #9b59b6; text-align: center;">Makaleler</h2>', unsafe_allow_html=True)
 
-st.write("Here we are at the end of getting started with streamlit! Happy Streamlit-ing! :balloon:")
+# Makale 1
+if st.button("Makale 1"):
+    st.markdown('<div style="background-color: #9b59b6; padding: 20px; border-radius: 10px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);"><h3 style="color: #f4d03f;">Başlık 1</h3><p style="color: #f4d03f;">Burada makale içeriği yer alacak.</p></div>', unsafe_allow_html=True)
+
+# Makale 2
+if st.button("Makale 2"):
+    st.markdown('<div style="background-color: #9b59b6; padding: 20px; border-radius: 10px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);"><h3 style="color: #f4d03f;">Başlık 2</h3><p style="color: #f4d03f;">Burada makale içeriği yer alacak.</p></div>', unsafe_allow_html=True)
+
+# Hakkımızda bölümü
+if st.button("Hakkımızda"):
+    st.markdown('''
+    ## Bilişim Sektöründe Gelecek: Veri Analizi ve İş İlanları
+    ...
+    ''')
+
+# Footer
+st.markdown('<p style="text-align: center; font-size: 12px; color: #888;">© 2024 FreshData. Tüm hakları saklıdır.</p>', unsafe_allow_html=True)
 
