@@ -70,8 +70,7 @@ if st.button("Grafikler"):
         # Bar chart oluştur
         st.bar_chart(top_locations)
 
-    # Veri setini yükleme
-    data = load_data(url)
+   
 
     # Verinin varlığını kontrol etme
     if data is not None:
