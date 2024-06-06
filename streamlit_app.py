@@ -27,7 +27,6 @@ def load_data(url):
 df = load_data(url)
 
 # Streamlit ile veriyi görüntüleme
-st.write("Dosya Başarıyla Yüklendi!")
 st.write("Dosya İçeriği:")
 st.write(df)
 # Arka plan rengi ve site ismi rengi
