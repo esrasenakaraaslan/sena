@@ -70,7 +70,7 @@ if st.button("Grafikler"):
     # Çalışma Şekli Grafiği
     st.markdown('<div style="background-color: #9b59b6; padding: 20px; border-radius: 10px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);"><p style="color: #f4d03f;">Çalışma şekli sütununda en çok tekrar edenleri çubuk grafiğine dök.</p></div>', unsafe_allow_html=True)
     # Çubuk grafiği çizme işlevi
-    calisma_sekli_sayilari = df['Çalışma Şekli'].value_counts()
+    calisma_sekli_sayilari = df['çalışma şekli'].value_counts()
     st.bar_chart(calisma_sekli_sayilari)
 
 
