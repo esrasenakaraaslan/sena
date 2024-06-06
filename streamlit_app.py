@@ -70,6 +70,18 @@ if st.button("Grafikler"):
         plt.ylabel('Sayı')
         plt.xticks(rotation=90)
         st.pyplot(plt)
+ def draw_seaborn_chart(data):
+        konum_sayilari = data['Konum'].value_counts()
+        filtre = konum_sayilari / len(data) * 100 < 5
+        filtrelenmis_konum_sayilari = konum_sayilari[~filtre]
+
+        plt.figure(figsize=(10, 6))
+        sns.barplot(x=filtrelenmis_konum_sayilari.index, y=filtrelenmis_konum_sayilari.values, palette="viridis")
+        plt.title('Konumların Sayısı (Yüzde 5\'ten fazla olanlar)')
+        plt.xlabel('Konumlar')
+        plt.ylabel('Sayı')
+        plt.xticks(rotation=90)
+        st.pyplot(plt)        
 
     # Verinin varlığını kontrol etme
     if df is not None:
