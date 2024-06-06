@@ -72,6 +72,12 @@ if st.button("Grafikler"):
     # Çubuk grafiği çizme işlevi
     calisma_sekli_sayilari = df['çalışma şekli'].value_counts()
     st.bar_chart(calisma_sekli_sayilari)
+  
+    # Pozisyon Grafiği
+    st.markdown('<div style="background-color: #9b59b6; padding: 20px; border-radius: 10px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);"><p style="color: #f4d03f;">Pozisyon sütununda en çok tekrar eden 20 pozisyonu çubuk grafiğine dök.</p></div>', unsafe_allow_html=True)
+    # Çubuk grafiği çizme işlevi
+    top_positions = df['Pozisyon'].value_counts().head(20)
+    st.bar_chart(top_positions)
 
 
 if st.button("İşveren Girişi", key="isveren_girisi_button"):
