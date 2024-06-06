@@ -78,6 +78,13 @@ if st.button("Grafikler"):
     # Çubuk grafiği çizme işlevi
     top_positions = df['Pozisyon'].value_counts().head(20)
     st.bar_chart(top_positions)
+    is_ilanlari = pd.read_excel(url)  # url değişkeni daha önce tanımlanmıştı
+
+# Daha önceki kodun devamı
+# En çok tekrar eden konumlar ve pozisyonlar
+en_cok_tekrar_edilen_konumlar = df['Konum'].value_counts().head(10).index
+en_cok_tekrar_edilen_pozisyonlar = df['Pozisyon'].value_counts().head(10).index
+
     # En çok tekrar eden konumlar ve pozisyonlar
 en_cok_tekrar_edilen_konumlar = is_ilanlari['Konum'].value_counts().head(10).index
 en_cok_tekrar_edilen_pozisyonlar = is_ilanlari['Pozisyon'].value_counts().head(10).index
