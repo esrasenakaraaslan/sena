@@ -7,7 +7,7 @@ import requests
 from io import BytesIO
 
 # Uygulama ayarları
-st.set_page_config(page_title="FreshData", page_icon=":rocket:", layout="wide", initial_sidebar_state="expanded", background="#aed6f1")
+st.set_page_config(page_title="FreshData", page_icon=":rocket:", layout="wide")
 
 # Başlık
 st.markdown('<h1 style="color: #9b59b6; text-align: center;">FreshData İş İlanı Sitesi</h1>', unsafe_allow_html=True)
