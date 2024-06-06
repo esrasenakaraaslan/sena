@@ -2,6 +2,8 @@ import streamlit as st
 import pandas as pd
 import requests
 from io import BytesIO
+import matplotlib.pyplot as plt
+import seaborn as sns
 
 # Uygulama ayarları
 st.set_page_config(page_title="FreshData", page_icon=":rocket:", layout="wide")
@@ -59,17 +61,20 @@ if st.button("Grafikler"):
     st.markdown('<div style="background-color: #9b59b6; padding: 20px; border-radius: 10px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);"><p style="color: #f4d03f;">Burada grafikler çizme işlevi gelecek.</p></div>', unsafe_allow_html=True)
     
     # Grafik çizme işlevi
-    def draw_bar_chart(data):
-        # Konum sütununda en çok tekrar eden 5 değeri bul
-        top_locations = data['Konum'].value_counts().head(5)
-
-        # Bar chart oluştur
-        st.bar_chart(top_locations)
+    def draw_seaborn_chart(data):
+        konum_sayilari = data['Konum'].value_counts()
+        plt.figure(figsize=(10, 6))
+        sns.barplot(x=konum_sayilari.index, y=konum_sayilari.values, palette="viridis")
+        plt.title('Konumların Sayısı')
+        plt.xlabel('Konumlar')
+        plt.ylabel('Sayı')
+        plt.xticks(rotation=90)
+        st.pyplot(plt)
 
     # Verinin varlığını kontrol etme
     if df is not None:
         # Grafikleri çizme işlevini çağırma
-        draw_bar_chart(df)   
+        draw_seaborn_chart(df)   
 
 if st.button("İşveren Girişi", key="isveren_girisi_button"):
     st.markdown('<div style="background-color: #9b59b6; padding: 20px; border-radius: 10px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);"><p style="color: #f4d03f;">Burada işveren giriş işlevi gelecek.</p></div>', unsafe_allow_html=True)
@@ -91,6 +96,10 @@ if st.button("Hakkımızda"):
     ## Bilişim Sektöründe Gelecek: Veri Analizi ve İş İlanları
     ...
     ''')
+
+# Footer
+st.markdown('<p style="text-align: center; font-size: 12px; color: #888;">© 2024 FreshData. Tüm hakları saklıdır.</p>', unsafe_allow_html=True)
+
 
 # Footer
 st.markdown('<p style="text-align: center; font-size: 12px; color: #888;">© 2024 FreshData. Tüm hakları saklıdır.</p>', unsafe_allow_html=True)
