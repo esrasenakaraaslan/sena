@@ -65,11 +65,9 @@ if st.button("Analiz"):
     st.markdown('<div style="background-color: #9b59b6; padding: 20px; border-radius: 10px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);"><p style="color: #f4d03f;">Burada veri analizi işlevi gelecek.</p></div>', unsafe_allow_html=True)
 
 if st.button("Grafikler"):
-    st.markdown('<div style="background-color: #9b59b6; padding: 20px; border-radius: 10px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);"><p style="color: #f4d03f;">Projemizdeki grafiklerimiz:</p></div>', unsafe_allow_html=True)
-    
+    st.write("Grafikler")
     # Grafiklerin altında buton ekleme
     if st.button("Grafiklere Git", key="grafiklere_git_button"):
-        st.write("Grafikler")
         if st.button("Konum Sütunu Grafik"):
             # Konum Grafiği
             st.markdown('<div style="background-color: #9b59b6; padding: 20px; border-radius: 10px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);"><p style="color: #f4d03f;">Konum sütununda en çok tekrar eden 5 konum</p></div>', unsafe_allow_html=True)
@@ -78,12 +76,14 @@ if st.button("Grafikler"):
             st.bar_chart(top_locations)
 
         if st.button("Çalışma Şekli Sütunu Grafik"):
+            # Çalışma Şekli Grafiği
             st.markdown('<div style="background-color: #9b59b6; padding: 20px; border-radius: 10px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);"><p style="color: #f4d03f;">Çalışma şekli sütunu</p></div>', unsafe_allow_html=True)
             # Çubuk grafiği çizme işlevi
             calisma_sekli_sayilari = df['çalışma şekli'].value_counts()
             st.bar_chart(calisma_sekli_sayilari)
-          
+      
         if st.button("Pozisyon Sütunu Grafik"):
+            # Pozisyon Grafiği
             st.markdown('<div style="background-color: #9b59b6; padding: 20px; border-radius: 10px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);"><p style="color: #f4d03f;">Pozisyon sütununda en çok tekrar eden 20 pozisyon</p></div>', unsafe_allow_html=True)
             # Çubuk grafiği çizme işlevi
             top_positions = df['Pozisyon'].value_counts().head(20)
