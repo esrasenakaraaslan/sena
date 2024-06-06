@@ -15,16 +15,16 @@ st.markdown(
     <style>
         /* Arka plan rengi */
         body {
-            background-color: #aed6f1;
+            background-color: #3498db; /* Mavi renk */
         }
         /* Butonların rengi */
         .stButton>button {
-            background-color: #9b59b6;
-            color: #f4d03f;
+            background-color: #9b59b6; /* Mor renk */
+            color: #f4d03f; /* Sarı renk */
         }
         /* Butonların üstündeki metin rengi */
         .stButton>button div div {
-            color: #f4d03f;
+            color: #f4d03f; /* Sarı renk */
         }
     </style>
     """,
