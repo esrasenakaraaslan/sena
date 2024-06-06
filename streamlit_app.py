@@ -1,9 +1,10 @@
 import streamlit as st
 import pandas as pd
+
+
 import requests
 from io import BytesIO
-import matplotlib.pyplot as plt
-import seaborn as sns
+import openpyxl
 
 # Uygulama ayarları
 st.set_page_config(page_title="FreshData", page_icon=":rocket:", layout="wide")
@@ -11,23 +12,23 @@ st.set_page_config(page_title="FreshData", page_icon=":rocket:", layout="wide")
 # Başlık
 st.markdown('<h1 style="color: #9b59b6; text-align: center;">FreshData İş İlanı Sitesi</h1>', unsafe_allow_html=True)
 
+
 # GitHub'daki Excel dosyasının URL'si
 url = "https://github.com/esrasenakaraaslan/web_sitesi/raw/main/.devcontainer/t%C3%BCm_veriler_d%C3%BCzenlenmi%C5%9F_y%C4%B1ll%C4%B1%20(4).xlsx"
 response = requests.get(url)
 file = BytesIO(response.content)
 
 # Excel dosyasını yükleyip okuma
-@st.cache_data
-def load_data(file):
-    return pd.read_excel(file)
+@st.cache
+def load_data(url):
+    return pd.read_excel(url)
 
 # Veriyi yükle
-df = load_data(file)
+df = load_data(url)
 
 # Streamlit ile veriyi görüntüleme
 st.write("Dosya İçeriği:")
 st.write(df)
-
 # Arka plan rengi ve site ismi rengi
 st.markdown(
     """
@@ -56,37 +57,23 @@ if st.button("Türkiye'nin Geldiği Son Nokta", key="son_nokta_button"):
 
 if st.button("Analiz"):
     st.markdown('<div style="background-color: #9b59b6; padding: 20px; border-radius: 10px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);"><p style="color: #f4d03f;">Burada veri analizi işlevi gelecek.</p></div>', unsafe_allow_html=True)
+
 if st.button("Grafikler"):
     st.markdown('<div style="background-color: #9b59b6; padding: 20px; border-radius: 10px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);"><p style="color: #f4d03f;">Burada grafikler çizme işlevi gelecek.</p></div>', unsafe_allow_html=True)
-    
-    if st.button("Konum Grafiği", key="konum_grafik_button"):
-        st.markdown('<div style="background-color: #9b59b6; padding: 20px; border-radius: 10px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);"><p style="color: #f4d03f;">Konum sütununda en çok tekrar eden 10 konumu çubuk grafiğine dök.</p></div>', unsafe_allow_html=True)
-        # Çubuk grafiği çizme işlevi
-        konum_sayilari = df['Konum'].value_counts().head(10)
-        plt.figure(figsize=(10, 6))
-        sns.barplot(x=konum_sayilari.index, y=konum_sayilari.values, palette="viridis")
-        plt.title('Konumların Sayısı')
-        plt.xlabel('Konumlar')
-        plt.ylabel('Sayı')
-        plt.xticks(rotation=45)
-        st.pyplot(plt)
+ # Grafik çizme işlevi
+    def draw_bar_chart(data):
+        # Konum sütununda en çok tekrar eden 5 değeri bul
+        top_locations = data['Konum'].value_counts().head(5)
 
-    if st.button("Çalışma Şekli Grafiği", key="calisma_sekli_grafik_button"):
-        st.markdown('<div style="background-color: #9b59b6; padding: 20px; border-radius: 10px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);"><p style="color: #f4d03f;">Çalışma şekli sütununda en çok tekrar edenleri çubuk grafiğine dök.</p></div>', unsafe_allow_html=True)
-        # Çubuk grafiği çizme işlevi
-        calisma_sekli_sayilari = df['Çalışma Şekli'].value_counts()
-        plt.figure(figsize=(10, 6))
-        sns.barplot(x=calisma_sekli_sayilari.index, y=calisma_sekli_sayilari.values, palette="viridis")
-        plt.title('Çalışma Şeklinin Dağılımı')
-        plt.xlabel('Çalışma Şekli')
-        plt.ylabel('Sayı')
-        plt.xticks(rotation=45)
-        st.pyplot(plt)
+        # Bar chart oluştur
+        st.bar_chart(top_locations)
+
+   
 
     # Verinin varlığını kontrol etme
-    if df is not None:
+    if data is not None:
         # Grafikleri çizme işlevini çağırma
-        draw_seaborn_chart(df)   
+        draw_bar_chart(data)   
 
 if st.button("İşveren Girişi", key="isveren_girisi_button"):
     st.markdown('<div style="background-color: #9b59b6; padding: 20px; border-radius: 10px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);"><p style="color: #f4d03f;">Burada işveren giriş işlevi gelecek.</p></div>', unsafe_allow_html=True)
