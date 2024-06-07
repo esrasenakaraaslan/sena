@@ -31,7 +31,7 @@ st.markdown(
         }
          /* Arka plan resmi */
         body {{
-            background-image: url("{URL_TO_YOUR_IMAGE}");
+            background-image: url("{https://i.pinimg.com/originals/2c/2d/1d/2c2d1dfca6979cb8d1a775983f9d781c.jpg}");
             background-size: cover;
             background-repeat: no-repeat;
             background-attachment: fixed;
