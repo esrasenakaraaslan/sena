@@ -53,11 +53,18 @@ df = load_data(url)
 # Streamlit ile veriyi görüntüleme
 st.write("Dosya İçeriği:")
 st.write(df)
+import random
 
+# Meslek Grupları butonunun durumunu takip eden bir oturum durumu (session state) belirle
+if 'meslek_gruplari_acik' not in st.session_state:
+    st.session_state.meslek_gruplari_acik = False
 
-
-# Meslek Grupları butonu
+# Meslek Grupları butonuna tıklama durumu
 if st.button("Meslek Grupları", key="meslek_grupları_button"):
+    st.session_state.meslek_gruplari_acik = not st.session_state.meslek_gruplari_acik
+
+# Meslek Grupları durumuna göre içeriği göster veya gizle
+if st.session_state.meslek_gruplari_acik:
     st.markdown('<div style="background-color: #9b59b6; padding: 20px; border-radius: 10px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);"><p style="color: #f4d03f;">Meslek Grupları</p></div>', unsafe_allow_html=True)
     
     # Veri setinden pozisyonları al ve benzersiz olanları seç
