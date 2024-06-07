@@ -8,7 +8,13 @@ from sklearn.model_selection import train_test_split
 from sklearn.ensemble import RandomForestClassifier
 import numpy as np
 import random
+import joblib
 
+# Model dosyasının URL'si
+model_url = "https://github.com/esrasenakaraaslan/sena/raw/main/.devcontainer/model%20(4).joblib"
+
+# Modeli yükle
+model = joblib.load(model_url)
 # Uygulama ayarları
 st.set_page_config(page_title="FreshData", page_icon=":rocket:", layout="wide")
 
