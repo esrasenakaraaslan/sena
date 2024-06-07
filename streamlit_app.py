@@ -147,8 +147,8 @@ if st.button("Makine Öğrenmesi"):
 
     # Hedef ve özellik değişkenleri
     try:
-        y = df["Yıl"]
-        X = df.drop(columns=["Yıl"])
+        y = df["Tarih"]
+        X = df.drop(columns=["Tarih"])
 
         # Veriyi sayısal verilere dönüştürme
         X = pd.get_dummies(X, drop_first=True)
