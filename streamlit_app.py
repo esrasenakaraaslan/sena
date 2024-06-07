@@ -188,6 +188,7 @@ model_url = "https://github.com/esrasenakaraaslan/sena/raw/main/.devcontainer/mo
 
 # Modeli yükle
 model = joblib.load(model_url)
+
 # Meslek seçimini alma
 selected_position = st.selectbox("Meslek Seçiniz", unique_positions)
 
