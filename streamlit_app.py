@@ -148,6 +148,7 @@ if st.button("Makine Öğrenmesi"):
 
     # Virgüllerin kaldırılması
     df['Tarih'] = df['Tarih'].str.replace(',', '')
+
     # Sütun adlarını yazdırma
     st.write("Sütun Adları:")
     st.write(df.columns) 
@@ -156,10 +157,10 @@ if st.button("Makine Öğrenmesi"):
         y = df["Tarih"]
         X = df.drop(columns=["Tarih"])
 
-       
         # Eğitim ve test verilerine ayırma
-        X_train, X_test
-         # Rastgele Orman Sınıflandırıcısı modelini oluşturma ve eğitme
+        X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
+        
+        # Rastgele Orman Sınıflandırıcısı modelini oluşturma ve eğitme
         rf = RandomForestClassifier()
         model = rf.fit(X_train, y_train)
 
@@ -175,9 +176,10 @@ if st.button("Makine Öğrenmesi"):
         st.write("Gerçek Değer:", y.iloc[sample_data_index])
 
     except KeyError as e:
-        st.error("Veri setinde belirtilen sütun adı bulunamadı.")
+        st.error("Veri setinde belirtilen sütun adı bulunamadı: {}".format(e))
     except Exception as e:
-        st.error("Beklenmeyen bir hata oluştu:", e) 
+        st.error("Beklenmeyen bir hata oluştu: {}".format(e)) 
+
 # Makaleler bölümü
 st.markdown('<h2 style="color: #9b59b6; text-align: center;">Makaleler</h2>', unsafe_allow_html=True)
 
