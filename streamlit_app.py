@@ -136,11 +136,12 @@ if st.button("İşveren Girişi", key="isveren_girisi_button"):
 # Makine Öğrenmesi Kısmı
 if st.button("Makine Öğrenmesi"):
     st.write("Makine Öğrenmesi Modeli")
-
     # Veriyi yükleme ve kontrol etme
     df = load_data(url)
     st.write(df.head(3))
 
+# Virgüllerin kaldırılması
+    df['Tarih'] = df['Tarih'].str.replace(',', '')
     # Sütun adlarını yazdırma
     st.write("Sütun Adları:")
     st.write(df.columns)
