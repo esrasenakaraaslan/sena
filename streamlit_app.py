@@ -147,9 +147,6 @@ if st.button("Makine Öğrenmesi"):
     # Sayısal olmayan değerleri içeren satırları filtreleme
     df = df[df['Tarih'].str.isdigit()]
 
-    # 'Tarih' sütununu ondalık sayılara dönüştürme
-    df['Tarih'] = df['Tarih'].astype(float)
-
     # Virgüllerin kaldırılması
     df['Tarih'] = df['Tarih'].str.replace(',', '')
 
