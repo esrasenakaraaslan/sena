@@ -134,43 +134,39 @@ if st.button("Grafikler"):
 if st.button("İşveren Girişi", key="isveren_girisi_button"):
     st.markdown('<div style="background-color: #9b59b6; padding: 20px; border-radius: 10px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);"><p style="color: #f4d03f;">Burada işveren giriş işlevi gelecek.</p></div>', unsafe_allow_html=True)
 
+# Makine Öğrenmesi Kısmı
 if st.button("Makine Öğrenmesi"):
-    st.markdown('<div style="background-color: #9b59b6; padding: 20px; border-radius: 10px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);"><p style="color: #f4d03f;">Makine Öğrenmesi Eğitimi ve Sonuçları</p></div>', unsafe_allow_html=True)
+    st.write("Makine Öğrenmesi Modeli")
 
-    # Veriyi yükle
-    df_ml = pd.read_excel(file)
-    
-    # Veriyi önizleme
-    st.write("Veri Önizleme:")
-    st.write(df_ml.head(3))
-    
-    # Özellikler ve hedef değişken
-    y = df_ml["Tarih"]
-    x = df_ml.drop(columns=["Tarih"])
-    
+    # Veriyi yükleme ve kontrol etme
+    df = load_data(url)
+    st.write(df.head(3))
+
+    # Hedef ve özellik değişkenleri
+    y = df["Yıl"]
+    X = df.drop(columns=["Yıl"])
+
     # Veriyi eğitim ve test setlerine ayırma
-    x_train, x_test, y_train, y_test = train_test_split(x, y, test_size=0.2, random_state=42)
-    
+    X_train, X_test, Y_train, Y_test = train_test_split(X, y, test_size=0.2, random_state=42)
+
     # Random Forest modelini eğitme
     rf = RandomForestClassifier()
-    model = rf.fit(x_train, y_train)
-    
-    # Model performansını değerlendirme
-    train_score = model.score(x_train, y_train)
-    test_score = model.score(x_test, y_test)
-    
-    st.write(f"Model Eğitim Skoru: {train_score:.2f}")
-    st.write(f"Model Test Skoru: {test_score:.2f}")
-    
-    # Rastgele bir veri noktasını seçip tahminde bulunma
-    random_index = np.random.randint(0, len(x))
-    random_sample = np.array(x.iloc[random_index])
-    prediction = model.predict([random_sample])[0]
-    actual = y.iloc[random_index]
-    
-    st.write(f"Rastgele Seçilen Veri Noktasının Gerçek Değeri: {actual}")
-    st.write(f"Rastgele Seçilen Veri Noktasının Model Tahmini: {prediction}")
-    
+    model = rf.fit(X_train, Y_train)
+
+    # Modelin başarımını gösterme
+    st.write(f"Test Seti Başarımı: {model.score(X_test, Y_test)}")
+    st.write(f"Eğitim Seti Başarımı: {model.score(X_train, Y_train)}")
+
+    # Rastgele bir örneği tahmin etme
+    random_index = 1500
+    if random_index < len(X):
+        a = np.array(X.iloc[random_index])
+        prediction = model.predict([a])
+        st.write(f"Tahmin Edilen Değer: {prediction[0]}")
+        st.write(f"Gerçek Değer: {y.iloc[random_index]}")
+    else:
+        st.write(f"Veri setinde {random_index} indeksli örnek bulunmamakta.")
+        
 # Makaleler bölümü
 st.markdown('<h2 style="color: #9b59b6; text-align: center;">Makaleler</h2>', unsafe_allow_html=True)
 
