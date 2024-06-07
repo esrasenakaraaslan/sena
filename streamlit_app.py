@@ -51,9 +51,6 @@ df = load_data(url)
 st.write("Dosya İçeriği:")
 st.write(df)
 
-# İşlev butonları ve içerikleri
-if st.button("İş Bul", key="iş_bul_button"):
-    st.markdown('<div style="background-color: #9b59b6; padding: 20px; border-radius: 10px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);"><p style="color: #f4d03f;">Burada iş bulma işlevi gelecek.</p></div>', unsafe_allow_html=True)
 
 if st.button("Meslek Grupları", key="meslek_grupları_button"):
     st.markdown('<div style="background-color: #9b59b6; padding: 20px; border-radius: 10px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);"><p style="color: #f4d03f;">Burada meslek gruplarına göre iş arama işlevi gelecek.</p></div>', unsafe_allow_html=True)
@@ -137,9 +134,43 @@ if st.button("Grafikler"):
 if st.button("İşveren Girişi", key="isveren_girisi_button"):
     st.markdown('<div style="background-color: #9b59b6; padding: 20px; border-radius: 10px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);"><p style="color: #f4d03f;">Burada işveren giriş işlevi gelecek.</p></div>', unsafe_allow_html=True)
 
-if st.button("Regresyon"):
-    st.markdown('<div style="background-color: #9b59b6; padding: 20px; border-radius: 10px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);"><p style="color: #f4d03f;">Burada regresyon analizi yapılacak.</p></div>', unsafe_allow_html=True)
+if st.button("Makine Öğrenmesi"):
+    st.markdown('<div style="background-color: #9b59b6; padding: 20px; border-radius: 10px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);"><p style="color: #f4d03f;">Makine Öğrenmesi Eğitimi ve Sonuçları</p></div>', unsafe_allow_html=True)
 
+    # Veriyi yükle
+    df_ml = pd.read_excel(file)
+    
+    # Veriyi önizleme
+    st.write("Veri Önizleme:")
+    st.write(df_ml.head(3))
+    
+    # Özellikler ve hedef değişken
+    y = df_ml["Yıl"]
+    x = df_ml.drop(columns=["Yıl"])
+    
+    # Veriyi eğitim ve test setlerine ayırma
+    x_train, x_test, y_train, y_test = train_test_split(x, y, test_size=0.2, random_state=42)
+    
+    # Random Forest modelini eğitme
+    rf = RandomForestClassifier()
+    model = rf.fit(x_train, y_train)
+    
+    # Model performansını değerlendirme
+    train_score = model.score(x_train, y_train)
+    test_score = model.score(x_test, y_test)
+    
+    st.write(f"Model Eğitim Skoru: {train_score:.2f}")
+    st.write(f"Model Test Skoru: {test_score:.2f}")
+    
+    # Rastgele bir veri noktasını seçip tahminde bulunma
+    random_index = np.random.randint(0, len(x))
+    random_sample = np.array(x.iloc[random_index])
+    prediction = model.predict([random_sample])[0]
+    actual = y.iloc[random_index]
+    
+    st.write(f"Rastgele Seçilen Veri Noktasının Gerçek Değeri: {actual}")
+    st.write(f"Rastgele Seçilen Veri Noktasının Model Tahmini: {prediction}")
+    
 # Makaleler bölümü
 st.markdown('<h2 style="color: #9b59b6; text-align: center;">Makaleler</h2>', unsafe_allow_html=True)
 
