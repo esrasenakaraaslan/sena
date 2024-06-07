@@ -13,12 +13,17 @@ import random
 st.set_page_config(page_title="FreshData", page_icon=":rocket:", layout="wide")
 
 # CSS stil tanımları
+# CSS stil tanımları
 st.markdown(
     """
     <style>
         /* Arka plan rengi */
         body {
             background-color: #3498db; /* Mavi renk */
+            background-image: url("https://i.pinimg.com/originals/2c/2d/1d/2c2d1dfca6979cb8d1a775983f9d781c.jpg");
+            background-size: cover;
+            background-repeat: no-repeat;
+            background-attachment: fixed;
         }
         /* Butonların rengi */
         .stButton>button {
@@ -29,13 +34,6 @@ st.markdown(
         .stButton>button div div {
             color: #f4d03f; /* Sarı renk */
         }
-         /* Arka plan resmi */
-        body {{
-            background-image: url("{https://i.pinimg.com/originals/2c/2d/1d/2c2d1dfca6979cb8d1a775983f9d781c.jpg}");
-            background-size: cover;
-            background-repeat: no-repeat;
-            background-attachment: fixed;
-        }}
     </style>
     """,
     unsafe_allow_html=True
