@@ -92,6 +92,27 @@ if st.button("Grafikler"):
     plt.xlabel('Pozisyon')
     plt.ylabel('Sayı')
     st.pyplot(plt)
+    # En çok tekrar eden konumlar ve pozisyonlar
+    en_cok_tekrar_edilen_konumlar = df['Konum'].value_counts().head(10).index
+    en_cok_tekrar_edilen_pozisyonlar = df['Pozisyon'].value_counts().head(10).index
+
+    # Filtrelenmiş veri
+    filtrelenmis_veri = df[
+        df['Konum'].isin(en_cok_tekrar_edilen_konumlar) & 
+        df['Pozisyon'].isin(en_cok_tekrar_edilen_pozisyonlar)
+    ]
+
+    # Çapraz tablo oluştur
+    cross_table = pd.crosstab(index=filtrelenmis_veri['Konum'], columns=filtrelenmis_veri['Pozisyon'])
+
+    # Streamlit ile görselleştirme
+    st.markdown('<div style="background-color: #9b59b6; padding: 20px; border-radius: 10px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);"><p style="color: #f4d03f;">En Çok Tekrar Edilen İlk 10 Konum ve Pozisyon İlişkisi Heatmap</p></div>', unsafe_allow_html=True)
+    plt.figure(figsize=(10, 6))
+    sns.heatmap(cross_table, cmap='rainbow', annot=True, fmt='d', linewidths=.5)
+    plt.title('En Çok Tekrar Edilen İlk 10 Konum ve Pozisyon İlişkisi Heatmap')
+    plt.xlabel('Pozisyon')
+    plt.ylabel('Konum')
+    st.pyplot(plt)
 
 if st.button("İşveren Girişi", key="isveren_girisi_button"):
     st.markdown('<div style="background-color: #9b59b6; padding: 20px; border-radius: 10px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);"><p style="color: #f4d03f;">Burada işveren giriş işlevi gelecek.</p></div>', unsafe_allow_html=True)
