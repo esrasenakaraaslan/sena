@@ -144,8 +144,7 @@ if st.button("Makine Öğrenmesi"):
     df['Tarih'] = df['Tarih'].str.replace(',', '')
     # Sütun adlarını yazdırma
     st.write("Sütun Adları:")
-    st.write(df.columns)
-
+    st.write(df.columns) 
     # Hedef ve özellik değişkenleri
     try:
         y = df["Tarih"]
