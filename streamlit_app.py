@@ -143,8 +143,8 @@ if st.button("Makine Öğrenmesi"):
     st.write(df.head(3))
 
     # Hedef ve özellik değişkenleri
-    y = df["Yıl"]
-    X = df.drop(columns=["Yıl"])
+    y = df["Tarih"]
+    X = df.drop(columns=["Tarih"])
 
     # Veriyi eğitim ve test setlerine ayırma
     X_train, X_test, Y_train, Y_test = train_test_split(X, y, test_size=0.2, random_state=42)
