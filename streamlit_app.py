@@ -139,7 +139,15 @@ if st.button("Makine Öğrenmesi"):
     # Veriyi yükleme ve kontrol etme
     df = load_data(url)
     st.write(df.head(3))
+    # Tarih sütunundaki değerlerin sayısal olup olmadığını kontrol etme
+    non_numeric_values = df[~df['Tarih'].str.isdigit()]['Tarih']
+    st.write("Sayısal olmayan değerler:", non_numeric_values)
 
+    # Sayısal olmayan değerleri içeren satırları filtreleme
+    df = df[df['Tarih'].str.isdigit()]
+
+    # 'Tarih' sütununu ondalık sayılara dönüştürme
+    df['Tarih'] = df['Tarih'].astype(float)
     # 'Tarih' sütununun veri tipini kontrol etme
     st.write(df['Tarih'].dtype)
 
