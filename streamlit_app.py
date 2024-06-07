@@ -10,11 +10,7 @@ import numpy as np
 import random
 import joblib
 
-# Model dosyasının URL'si
-model_url = "https://github.com/esrasenakaraaslan/sena/raw/main/.devcontainer/model%20(4).joblib"
 
-# Modeli yükle
-model = joblib.load(model_url)
 # Uygulama ayarları
 st.set_page_config(page_title="FreshData", page_icon=":rocket:", layout="wide")
 
@@ -187,7 +183,11 @@ if st.button("Grafikler"):
     st.pyplot(plt)
 if st.button("İşveren Girişi", key="isveren_girisi_button"):
     st.markdown('<div style="background-color: #9b59b6; padding: 20px; border-radius: 10px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);"><p style="color: #f4d03f;">Burada işveren giriş işlevi gelecek.</p></div>', unsafe_allow_html=True)
+# Model dosyasının URL'si
+model_url = "https://github.com/esrasenakaraaslan/sena/raw/main/.devcontainer/model%20(4).joblib"
 
+# Modeli yükle
+model = joblib.load(model_url)
 # Meslek seçimini alma
 selected_position = st.selectbox("Meslek Seçiniz", unique_positions)
 
