@@ -7,6 +7,7 @@ from io import BytesIO
 from sklearn.model_selection import train_test_split
 from sklearn.ensemble import RandomForestClassifier
 import numpy as np
+import random
 
 # Uygulama ayarları
 st.set_page_config(page_title="FreshData", page_icon=":rocket:", layout="wide")
@@ -54,8 +55,23 @@ st.write("Dosya İçeriği:")
 st.write(df)
 
 
+
+# Meslek Grupları butonu
 if st.button("Meslek Grupları", key="meslek_grupları_button"):
-    st.markdown('<div style="background-color: #9b59b6; padding: 20px; border-radius: 10px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);"><p style="color: #f4d03f;">Burada meslek gruplarına göre iş arama işlevi gelecek.</p></div>', unsafe_allow_html=True)
+    st.markdown('<div style="background-color: #9b59b6; padding: 20px; border-radius: 10px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);"><p style="color: #f4d03f;">Meslek Grupları</p></div>', unsafe_allow_html=True)
+    
+    # Veri setinden pozisyonları al ve benzersiz olanları seç
+    unique_positions = df['Pozisyon'].unique()
+
+    # Rastgele renk oluşturucu
+    def random_color():
+        return "#{:06x}".format(random.randint(0, 0xFFFFFF))
+
+    # Pozisyonları göster
+    for position in unique_positions:
+        color = random_color()
+        st.markdown(f'<div style="background-color: {color}; padding: 10px; margin: 5px; border-radius: 5px; color: white;">{position}</div>', unsafe_allow_html=True)
+
 
 if st.button("Türkiye'nin Geldiği Son Nokta", key="son_nokta_button"):
     st.markdown('<div style="background-color: #9b59b6; padding: 20px; border-radius: 10px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);"><p style="color: #f4d03f;">Burada Türkiye\'nin geldiği son noktayla ilgili bilgiler yer alacak.</p></div>', unsafe_allow_html=True)
