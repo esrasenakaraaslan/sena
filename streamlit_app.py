@@ -18,7 +18,7 @@ st.markdown(
     <style>
         /* Arka plan rengi */
         body {
-            background-color: #3498db; /* Mavi renk */
+            background-color: #3458db; /* Mavi renk */
         }
         /* Butonların rengi */
         .stButton>button {
