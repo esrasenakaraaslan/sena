@@ -150,9 +150,7 @@ if st.button("Makine Öğrenmesi"):
         y = df["Tarih"]
         X = df.drop(columns=["Tarih"])
 
-        # Veriyi sayısal verilere dönüştürme
-        X = pd.get_dummies(X, drop_first=True)
-
+       
         # Eğitim ve test verilerine ayırma
         X_train, X_test
          # Rastgele Orman Sınıflandırıcısı modelini oluşturma ve eğitme
