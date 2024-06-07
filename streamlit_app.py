@@ -18,7 +18,7 @@ st.markdown(
     <style>
         /* Arka plan rengi */
         body {
-            background-color: #3458db; /* Mavi renk */
+            background-color: #3498db; /* Mavi renk */
         }
         /* Butonların rengi */
         .stButton>button {
@@ -31,7 +31,7 @@ st.markdown(
         }
          /* Arka plan resmi */
         body {{
-            background-image: url("{https://www.google.com/url?sa=i&url=https%3A%2F%2Ftr.pngtree.com%2Ffreebackground%2Fsweet-strawberries_15392556.html&psig=AOvVaw24X8M7RRfPbfFDkGWOeYXG&ust=1717853686938000&source=images&cd=vfe&opi=89978449&ved=0CBIQjRxqFwoTCLCalfDNyYYDFQAAAAAdAAAAABAE}");
+            background-image: url("{URL_TO_YOUR_IMAGE}");
             background-size: cover;
             background-repeat: no-repeat;
             background-attachment: fixed;
