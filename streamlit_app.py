@@ -13,7 +13,6 @@ import joblib
 
 # Uygulama ayarları
 st.set_page_config(page_title="FreshData", page_icon=":rocket:", layout="wide")
-
 # CSS stil tanımları
 st.markdown(
     """
@@ -21,8 +20,8 @@ st.markdown(
         /* Arka plan rengi ve mor yuvarlaklar */
         body {
             background-color: #b3d9ff; /* Tatlı mavi renk */
-            background-image: radial-gradient(circle, #9b59b6 10%, transparent 10%), 
-                              radial-gradient(circle, #9b59b6 10%, transparent 10%);
+            background-image: radial-gradient(circle, #9b59b6 20%, transparent 20%), 
+                              radial-gradient(circle, #9b59b6 20%, transparent 20%);
             background-size: 50px 50px;
             background-position: 0 0, 25px 25px;
             background-attachment: fixed;
