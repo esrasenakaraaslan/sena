@@ -133,7 +133,6 @@ if st.button("Grafikler"):
     st.pyplot(plt)
 if st.button("İşveren Girişi", key="isveren_girisi_button"):
     st.markdown('<div style="background-color: #9b59b6; padding: 20px; border-radius: 10px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);"><p style="color: #f4d03f;">Burada işveren giriş işlevi gelecek.</p></div>', unsafe_allow_html=True)
-
 # Makine Öğrenmesi Kısmı
 if st.button("Makine Öğrenmesi"):
     st.write("Makine Öğrenmesi Modeli")
@@ -142,31 +141,39 @@ if st.button("Makine Öğrenmesi"):
     df = load_data(url)
     st.write(df.head(3))
 
+    # Sütun adlarını yazdırma
+    st.write("Sütun Adları:")
+    st.write(df.columns)
+
     # Hedef ve özellik değişkenleri
-    y = df["Tarih"]
-    X = df.drop(columns=["Tarih"])
+    try:
+        y = df["Yıl"]
+        X = df.drop(columns=["Yıl"])
 
-    # Veriyi eğitim ve test setlerine ayırma
-    X_train, X_test, Y_train, Y_test = train_test_split(X, y, test_size=0.2, random_state=42)
+        # Veriyi sayısal verilere dönüştürme
+        X = pd.get_dummies(X, drop_first=True)
 
-    # Random Forest modelini eğitme
-    rf = RandomForestClassifier()
-    model = rf.fit(X_train, Y_train)
+        # Eğitim ve test verilerine ayırma
+        X_train, X_test
+         # Rastgele Orman Sınıflandırıcısı modelini oluşturma ve eğitme
+        rf = RandomForestClassifier()
+        model = rf.fit(X_train, y_train)
 
-    # Modelin başarımını gösterme
-    st.write(f"Test Seti Başarımı: {model.score(X_test, Y_test)}")
-    st.write(f"Eğitim Seti Başarımı: {model.score(X_train, Y_train)}")
+        # Modelin doğruluk puanını yazdırma
+        st.write("Test verisi doğruluk puanı:", model.score(X_test, y_test))
+        st.write("Eğitim verisi doğruluk puanı:", model.score(X_train, y_train))
 
-    # Rastgele bir örneği tahmin etme
-    random_index = 1500
-    if random_index < len(X):
-        a = np.array(X.iloc[random_index])
-        prediction = model.predict([a])
-        st.write(f"Tahmin Edilen Değer: {prediction[0]}")
-        st.write(f"Gerçek Değer: {y.iloc[random_index]}")
-    else:
-        st.write(f"Veri setinde {random_index} indeksli örnek bulunmamakta.")
-        
+        # Örnek bir veri üzerinde modeli test etme
+        sample_data_index = 1500
+        sample_data = np.array(X.iloc[sample_data_index]).reshape(1, -1)
+        prediction = model.predict(sample_data)
+        st.write("Tahmin:", prediction)
+        st.write("Gerçek Değer:", y.iloc[sample_data_index])
+
+    except KeyError as e:
+        st.error("Veri setinde belirtilen sütun adı bulunamadı.")
+    except Exception as e:
+        st.error("Beklenmeyen bir hata oluştu:", e) 
 # Makaleler bölümü
 st.markdown('<h2 style="color: #9b59b6; text-align: center;">Makaleler</h2>', unsafe_allow_html=True)
 
