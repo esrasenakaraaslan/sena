@@ -29,6 +29,13 @@ st.markdown(
         .stButton>button div div {
             color: #f4d03f; /* Sarı renk */
         }
+         /* Arka plan resmi */
+        body {{
+            background-image: url("{https://www.google.com/url?sa=i&url=https%3A%2F%2Ftr.pngtree.com%2Ffreebackground%2Fsweet-strawberries_15392556.html&psig=AOvVaw24X8M7RRfPbfFDkGWOeYXG&ust=1717853686938000&source=images&cd=vfe&opi=89978449&ved=0CBIQjRxqFwoTCLCalfDNyYYDFQAAAAAdAAAAABAE}");
+            background-size: cover;
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+        }}
     </style>
     """,
     unsafe_allow_html=True
