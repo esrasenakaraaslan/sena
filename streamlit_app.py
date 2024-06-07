@@ -15,16 +15,16 @@ import joblib
 st.set_page_config(page_title="FreshData", page_icon=":rocket:", layout="wide")
 
 # CSS stil tanımları
-# CSS stil tanımları
 st.markdown(
     """
     <style>
-        /* Arka plan rengi */
+        /* Arka plan rengi ve mor yuvarlaklar */
         body {
-            background-color: #3498db; /* Mavi renk */
-            background-image: url("https://i.pinimg.com/originals/2c/2d/1d/2c2d1dfca6979cb8d1a775983f9d781c.jpg");
-            background-size: cover;
-            background-repeat: no-repeat;
+            background-color: #b3d9ff; /* Tatlı mavi renk */
+            background-image: radial-gradient(circle, #9b59b6 10%, transparent 10%), 
+                              radial-gradient(circle, #9b59b6 10%, transparent 10%);
+            background-size: 50px 50px;
+            background-position: 0 0, 25px 25px;
             background-attachment: fixed;
         }
         /* Butonların rengi */
@@ -40,7 +40,6 @@ st.markdown(
     """,
     unsafe_allow_html=True
 )
-
 # Başlık
 st.markdown('<h1 style="color: #9b59b6; text-align: center;">FreshData İş İlanı Sitesi</h1>', unsafe_allow_html=True)
 
