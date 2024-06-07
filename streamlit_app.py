@@ -139,6 +139,7 @@ if st.button("Makine Öğrenmesi"):
     # Veriyi yükleme ve kontrol etme
     df = load_data(url)
     st.write(df.head(3))
+
     # Tarih sütunundaki değerlerin sayısal olup olmadığını kontrol etme
     non_numeric_values = df[~df['Tarih'].str.isdigit()]['Tarih']
     st.write("Sayısal olmayan değerler:", non_numeric_values)
@@ -148,14 +149,15 @@ if st.button("Makine Öğrenmesi"):
 
     # 'Tarih' sütununu ondalık sayılara dönüştürme
     df['Tarih'] = df['Tarih'].astype(float)
+
+    # Virgüllerin kaldırılması
+    df['Tarih'] = df['Tarih'].str.replace(',', '')
+
     # 'Tarih' sütununun veri tipini kontrol etme
     st.write(df['Tarih'].dtype)
 
     # 'Tarih' sütununu dizeye dönüştürme
     df['Tarih'] = df['Tarih'].astype(str)
-
-    # Virgüllerin kaldırılması
-    df['Tarih'] = df['Tarih'].str.replace(',', '')
 
     # Sütun adlarını yazdırma
     st.write("Sütun Adları:")
@@ -186,7 +188,8 @@ if st.button("Makine Öğrenmesi"):
     except KeyError as e:
         st.error("Veri setinde belirtilen sütun adı bulunamadı: {}".format(e))
     except Exception as e:
-        st.error("Beklenmeyen bir hata oluştu: {}".format(e)) 
+        st.error("Beklenmeyen bir hata oluştu: {}".format(e))
+
 
 # Makaleler bölümü
 st.markdown('<h2 style="color: #9b59b6; text-align: center;">Makaleler</h2>', unsafe_allow_html=True)
