@@ -133,59 +133,6 @@ if st.button("Grafikler"):
     st.pyplot(plt)
 if st.button("İşveren Girişi", key="isveren_girisi_button"):
     st.markdown('<div style="background-color: #9b59b6; padding: 20px; border-radius: 10px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);"><p style="color: #f4d03f;">Burada işveren giriş işlevi gelecek.</p></div>', unsafe_allow_html=True)
-# Makine Öğrenmesi Kısmı
-if st.button("Makine Öğrenmesi"):
-    st.write("Makine Öğrenmesi Modeli")
-    # Veriyi yükleme ve kontrol etme
-    df = load_data(url)
-    st.write(df.head(3))
-
-    # Tarih sütunundaki değerlerin sayısal olup olmadığını kontrol etme
-    non_numeric_values = df[~df['Tarih'].str.isdigit()]['Tarih']
-    st.write("Sayısal olmayan değerler:", non_numeric_values)
-
-    # Sayısal olmayan değerleri içeren satırları filtreleme
-    df = df[df['Tarih'].str.isdigit()]
-
-    # Virgüllerin kaldırılması
-    df['Tarih'] = df['Tarih'].str.replace(',', '')
-
-    # 'Tarih' sütununun veri tipini kontrol etme
-    st.write(df['Tarih'].dtype)
-
-    # 'Tarih' sütununu dizeye dönüştürme
-    df['Tarih'] = df['Tarih'].astype(str)
-
-    # Sütun adlarını yazdırma
-    st.write("Sütun Adları:")
-    st.write(df.columns) 
-    # Hedef ve özellik değişkenleri
-    try:
-        y = df["Tarih"]
-        X = df.drop(columns=["Tarih"])
-
-        # Eğitim ve test verilerine ayırma
-        X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
-        
-        # Rastgele Orman Sınıflandırıcısı modelini oluşturma ve eğitme
-        rf = RandomForestClassifier()
-        model = rf.fit(X_train, y_train)
-
-        # Modelin doğruluk puanını yazdırma
-        st.write("Test verisi doğruluk puanı:", model.score(X_test, y_test))
-        st.write("Eğitim verisi doğruluk puanı:", model.score(X_train, y_train))
-
-        # Örnek bir veri üzerinde modeli test etme
-        sample_data_index = 1500
-        sample_data = np.array(X.iloc[sample_data_index]).reshape(1, -1)
-        prediction = model.predict(sample_data)
-        st.write("Tahmin:", prediction)
-        st.write("Gerçek Değer:", y.iloc[sample_data_index])
-
-    except KeyError as e:
-        st.error("Veri setinde belirtilen sütun adı bulunamadı: {}".format(e))
-    except Exception as e:
-        st.error("Beklenmeyen bir hata oluştu: {}".format(e))
 
 
 # Makaleler bölümü
