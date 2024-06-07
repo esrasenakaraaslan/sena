@@ -182,6 +182,20 @@ if st.button("Grafikler"):
 if st.button("İşveren Girişi", key="isveren_girisi_button"):
     st.markdown('<div style="background-color: #9b59b6; padding: 20px; border-radius: 10px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);"><p style="color: #f4d03f;">Burada işveren giriş işlevi gelecek.</p></div>', unsafe_allow_html=True)
 
+# Meslek seçimini alma
+selected_position = st.selectbox("Meslek Seçiniz", unique_positions)
+
+# Tahmin et butonu
+if st.button("Tahmin Et"):
+    # Seçilen meslek için tahmin yap
+    selected_data = df[df['Pozisyon'] == selected_position].drop(['Tarih'], axis=1)  # Seçilen pozisyonun verilerini al, tahmin yapabilmek için 'Tarih' sütununu kaldır
+    model = joblib.load("model (4).joblib")  # Modeli yükle
+    prediction = model.predict(selected_data)  # Tahmin yap
+    predicted_year = int(prediction)  # Tahmin sonucunu tam sayıya dönüştür
+    
+    # Tahmin sonucunu göster
+    st.write(f"{selected_position} mesleği için tahmin edilen yıl: {predicted_year}")
+
 
 # Makaleler bölümü
 st.markdown('<h2 style="color: #9b59b6; text-align: center;">Makaleler</h2>', unsafe_allow_html=True)
