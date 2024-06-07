@@ -140,7 +140,13 @@ if st.button("Makine Öğrenmesi"):
     df = load_data(url)
     st.write(df.head(3))
 
-# Virgüllerin kaldırılması
+    # 'Tarih' sütununun veri tipini kontrol etme
+    st.write(df['Tarih'].dtype)
+
+    # 'Tarih' sütununu dizeye dönüştürme
+    df['Tarih'] = df['Tarih'].astype(str)
+
+    # Virgüllerin kaldırılması
     df['Tarih'] = df['Tarih'].str.replace(',', '')
     # Sütun adlarını yazdırma
     st.write("Sütun Adları:")
