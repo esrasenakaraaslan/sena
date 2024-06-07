@@ -187,21 +187,25 @@ if st.button("İşveren Girişi", key="isveren_girisi_button"):
 model_url = "https://github.com/esrasenakaraaslan/sena/raw/main/.devcontainer/model%20(4).joblib"
 
 # Modeli yükle
-model = joblib.load(model_url)
+def load_model(url):
+    response = requests.get(url)
+    return joblib.load(BytesIO(response.content))
+
+model = load_model(model_url)
 
 # Meslek seçimini alma
-selected_position = st.selectbox("Meslek Seçiniz", unique_positions)
+selected_position = st.selectbox("Meslek Seçiniz", df['Pozisyon'].unique())
 
 # Tahmin et butonu
 if st.button("Tahmin Et"):
     # Seçilen meslek için tahmin yap
     selected_data = df[df['Pozisyon'] == selected_position].drop(['Tarih'], axis=1)  # Seçilen pozisyonun verilerini al, tahmin yapabilmek için 'Tarih' sütununu kaldır
-    model = joblib.load("model (4).joblib")  # Modeli yükle
     prediction = model.predict(selected_data)  # Tahmin yap
-    predicted_year = int(prediction)  # Tahmin sonucunu tam sayıya dönüştür
+    predicted_year = int(prediction[0])  # Tahmin sonucunu tam sayıya dönüştür
     
     # Tahmin sonucunu göster
     st.write(f"{selected_position} mesleği için tahmin edilen yıl: {predicted_year}")
+
 
 
 # Makaleler bölümü
