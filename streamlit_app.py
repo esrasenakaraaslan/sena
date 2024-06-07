@@ -2,9 +2,12 @@ import streamlit as st
 import pandas as pd
 import seaborn as sns
 import matplotlib.pyplot as plt
-
 import requests
 from io import BytesIO
+from sklearn.model_selection import train_test_split
+from sklearn.ensemble import RandomForestClassifier
+import numpy as np
+
 # Uygulama ayarları
 st.set_page_config(page_title="FreshData", page_icon=":rocket:", layout="wide")
 
@@ -39,7 +42,7 @@ response = requests.get(url)
 file = BytesIO(response.content)
 
 # Excel dosyasını yükleyip okuma
-@st.cache
+@st.cache_data
 def load_data(url):
     return pd.read_excel(url)
 
