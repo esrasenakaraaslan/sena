@@ -21,6 +21,9 @@ st.markdown(
             font-family: 'Roboto', sans-serif;
             color: #ffffff; /* Beyaz metin */
         }
+        .stApp {
+            background-color: rgba(0, 0, 128, 0.5); /* Yarı saydam koyu mavi arka plan */
+        }
         .stButton>button {
             background-color: #000080; /* Koyu mavi */
             color: white;
