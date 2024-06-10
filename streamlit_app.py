@@ -279,7 +279,35 @@ if st.button("Grafikler"):
     plt.xlabel('Çalışma Şekli')
     plt.ylabel('Konum')
     st.pyplot(plt)
- 
+
+# Tahmin Et butonu
+if st.button("Tahmin Et!!"):
+    # Eğitilmiş modelin URL'si
+    model_url = "https://github.com/esrasenakaraaslan/web_sitesi/raw/main/.devcontainer/model.pkl"
+    # Modeli yükle
+    model = pickle.load(urlopen(model_url))
+
+    # Tarih tahmini için gerekli fonksiyon
+    def predict_date(model, position):
+        return model.predict(position)
+
+    # Pozisyonları al
+    positions = df['Pozisyon'].unique()
+
+    # Pozisyon seçme kutusu
+    selected_position = st.selectbox("Pozisyon Seçiniz", positions)
+
+    # Kullanıcıdan tarih seçme kutusu
+    selected_date = st.date_input("Tarih Seçiniz")
+
+    # Tahmini tarih
+    predicted_date = predict_date(model, selected_position)
+
+    # Tahmin sonucunu göster
+    if selected_date == predicted_date:
+        st.success("Doğru Tahmin!")
+    else:
+        st.error("Yanlış Tahmin!")
 
     # Makaleler bölümü
 st.markdown('<h2 style="color: #9b59b6; text-align: center;">Makaleler</h2>', unsafe_allow_html=True)
