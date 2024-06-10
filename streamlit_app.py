@@ -182,7 +182,7 @@ if st.button("Grafikler"):
 if st.button("İşveren Girişi", key="isveren_girisi_button"):
     st.markdown('<div style="background-color: #9b59b6; padding: 20px; border-radius: 10px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);"><p style="color: #f4d03f;">Burada işveren giriş işlevi gelecek.</p></div>', unsafe_allow_html=True)
 # Model dosyasının URL'si
-model_url = "https://github.com/esrasenakaraaslan/sena/raw/main/.devcontainer/model%20(4).joblib"
+model_url = "https://github.com/esrasenakaraaslan/sena/raw/main/.devcontainer/model%20(4)%20(4).zip"
 
 # Modeli yükle
 def load_model(url):
