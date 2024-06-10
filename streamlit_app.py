@@ -188,16 +188,21 @@ if st.button("Grafikler"):
 
     st.markdown('</div>', unsafe_allow_html=True)
 
-# Modeli yükleme
-model = joblib.load("model.joblib")
+# Modeli Yükleme
+@st.cache(allow_output_mutation=True)
+def load_model(model_path):
+    model = joblib.load(model_path)  # Örnek olarak joblib kullanıldı, sizin modelinizin formatına göre değişebilir
+    return model
 
-# Kullanıcıdan girdileri al
-konum = st.text_input("Konum:", "")
-pozisyon = st.text_input("Pozisyon:", "")
+model_path = "https://github.com/esrasenakaraaslan/sena/raw/main/model%20(4)%20(3)%20(1).joblib"  # Eğitilmiş model dosyasının yolu
+model = load_model(model_path)
 
-# Kullanıcı girdileriyle tahmin yap
-if st.button("Tahmin Et"):
-    # Tahmin işlemi yapılacak
-    # Örnek olarak:
-    tahmin = model.predict_proba([[konum, pozisyon]])
-    st.write("İş bulma ihtimaliniz:", tahmin)
+# Giriş Verisini Alın
+user_input = st.text_input("Bir metin girin:")
+
+# Modeli Kullanarak Tahmin Yapma
+if st.button("Tahmin Yap"):
+    prediction = model.predict([user_input])  # Giriş metni üzerinde tahmin yapın
+
+    # Sonucu Gösterme
+    st.write("Tahmin:", prediction)
