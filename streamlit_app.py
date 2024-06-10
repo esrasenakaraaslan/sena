@@ -43,6 +43,10 @@ st.markdown(
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
             margin: 20px 0;
         }
+         .content-box h2 {
+            font-size: 28px; /* Yazı boyutunu büyüt */
+            color: #FFC0CB; /* Buton rengiyle aynı renk */
+        }
    .title {
     color: #FFB6C1; /* Tatlış pembiş */
     text-align: center;
