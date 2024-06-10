@@ -82,7 +82,10 @@ st.markdown(
 )
 
 # Başlık
-st.markdown('<h1 class="title">FreshData İş İlanı Sitesi</h1>', unsafe_allow_html=True)
+st.markdown('<div style="background-image: url(\'https://r.resimlink.com/USyYKmk.png\'); background-size: cover; padding: 50px; border-radius: 15px;">', unsafe_allow_html=True)
+st.markdown('<h1 class="title" style="color: #000080;">FreshData İş İlanı Sitesi</h1>', unsafe_allow_html=True)
+st.markdown('</div>', unsafe_allow_html=True)
+
 
 # GitHub'daki Excel dosyasının URL'si
 url = "https://github.com/esrasenakaraaslan/web_sitesi/raw/main/.devcontainer/t%C3%BCm_veriler_d%C3%BCzenlenmi%C5%9F_y%C4%B1ll%C4%B1%20(4).xlsx"
