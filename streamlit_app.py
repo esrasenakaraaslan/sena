@@ -25,7 +25,7 @@ st.markdown(
             background-color: rgba(0, 0, 255, 0); /* Tamamen saydam arka plan */
          }
         .stButton>button {
-            color: #FF1493; /* Pembe rengi (RGB: 255, 20, 147) */
+            color: #FF69B4; /* Koyu pembe renk (RGB: 255, 105, 180) */
             color: white;
             border-radius: 10px;
             padding: 10px 20px;
