@@ -361,4 +361,6 @@ if st.button("Hakkımızda"):
     ''')
 
 # Footer
-st.markdown('<p style="text-align: center; font-size: 12px; color: #888;">© 2024 FreshData. Tüm hakları saklıdır.</p>', unsafe_allow_html=True)
+st.markdown('<div class="content-box">', unsafe_allow_html=True)
+st.markdown('<h2 class="subtitle" style="color: #FFB6C1;">© 2024 FreshData. Tüm hakları saklıdır.</h2>', unsafe_allow_html=True)
+st.markdown('</div>', unsafe_allow_html=True)
