@@ -286,7 +286,7 @@ if st.button("Grafikler"):
 df['Tarih'] = pd.to_datetime(df['Tarih'].str.replace(',', ''), format='%d/%m/%Y', errors='coerce')
 
 # Tarih sütununda virgül olduğunu varsayarak, diğer dize verileri içeren satırları işleme almayı deneyebiliriz
- df['Tarih'] = df['Tarih'].apply(lambda x: pd.to_datetime(x.replace(',', ''), format='%d/%m/%Y', errors='coerce'))
+ #df['Tarih'] = df['Tarih'].apply(lambda x: pd.to_datetime(x.replace(',', ''), format='%d/%m/%Y', errors='coerce'))
 
 # Özellikler ve hedef değişkeni ayarla
 X = df.drop(columns=["Tarih"])
