@@ -43,7 +43,7 @@ st.markdown(
             margin: 20px 0;
         }
         .title {
-            color: #87CEFA; /* Açık mavi */
+            color: #FF1493; /* Pembe rengi (RGB: 255, 20, 147) */
             text-align: center;
             font-size: 48px;
             font-weight: bold;
