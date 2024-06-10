@@ -282,14 +282,7 @@ if st.button("Grafikler"):
 
 # Tahmin Et butonu
 if st.button("Tahmin Et!!"):
-    # Eğitilmiş modelin URL'si
-    model_url = "https://github.com/esrasenakaraaslan/web_sitesi/raw/main/.devcontainer/model.pkl"
-    # Modeli yükle
-    model = pickle.load(urlopen(model_url))
-
-    # Tarih tahmini için gerekli fonksiyon
-    def predict_date(model, position):
-        return model.predict(position)
+   
 
     # Pozisyonları al
     positions = df['Pozisyon'].unique()
