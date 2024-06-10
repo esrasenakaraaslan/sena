@@ -283,7 +283,7 @@ if st.button("Grafikler"):
     st.pyplot(plt)
 
 # Tarih sütununu uygun bir tarih veri tipine dönüştürme
-df['Tarih'] = pd.to_datetime(df['Tarih'].str.replace(',', ''), format='%d/%m/%Y', errors='coerce')
+df['Tarih'] = pd.to_datetime(df['Tarih'], format='%d/%m/%Y', errors='coerce')
 
 # Özellikler ve hedef değişkeni ayarla
 X = df.drop(columns=["Tarih"])
@@ -303,7 +303,6 @@ st.write("Eğitim verisi doğruluk puanı:", train_accuracy)
 st.write("Test verisi doğruluk puanı:", test_accuracy)
 
 # Eğitilmiş modeli kaydet
-import joblib
 joblib.dump(model, "model.joblib")
 
 # Başlık
@@ -336,7 +335,6 @@ if st.button("Tahmin Et!!"):
         st.success("Doğru Tahmin!")
     else:
         st.error("Yanlış Tahmin!")
-
 # Makale 1
 if st.button("Makale 1"):
     st.markdown('<div style="background-color: #9b59b6; padding: 20px; border-radius: 10px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);"><h3 style="color: #f4d03f;">Başlık 1</h3><p style="color: #f4d03f;">Burada makale içeriği yer alacak.</p></div>', unsafe_allow_html=True)
