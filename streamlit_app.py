@@ -5,6 +5,8 @@ import matplotlib.pyplot as plt
 import requests
 from io import BytesIO
 import random
+import pickle
+import requests
 
 # Uygulama ayarları
 st.set_page_config(page_title="FreshData", page_icon=":rocket:", layout="wide")
@@ -198,9 +200,6 @@ if st.button("Analiz"):
     st.markdown('<h2 class="subtitle">Analiz</h2>', unsafe_allow_html=True)
     st.markdown('<p>Burada veri analizi işlevi gelecek.</p>', unsafe_allow_html=True)
     st.markdown('</div>', unsafe_allow_html=True)
-
-
- 
     
 if st.button("Grafikler"):
     st.markdown('<div class="content-box">', unsafe_allow_html=True)
@@ -292,13 +291,23 @@ selected_position = st.selectbox("Pozisyon Seçiniz", positions)
 # Kullanıcıdan tarih seçme kutusu
 selected_date = st.date_input("Tarih Seçiniz")
 
+# Modelin URL'si
+model_url = "https://github.com/esrasenakaraaslan/web_sitesi/raw/main/.devcontainer/model.pkl"
+
+# Modeli indir
+response = requests.get(model_url)
+
+# İndirilen model dosyasını açma
+with open("model.pkl", "wb") as f:
+    f.write(response.content)
+
+# Modeli yükle
+with open("model.pkl", "rb") as f:
+    model = pickle.load(f)
+
 # "Tahmin Et!!" butonu
 if st.button("Tahmin Et!!"):
-    # Eğitilmiş modelin URL'si
-    model_url = "https://github.com/esrasenakaraaslan/sena/raw/main/model%20(4)%20(3)%20(1).joblib"
-    # Modeli yükle
-    model = pickle.load(urlopen(model_url))
-
+    
     # Tarih tahmini için gerekli fonksiyon
     def predict_date(model, position):
         return model.predict(position)
@@ -311,8 +320,6 @@ if st.button("Tahmin Et!!"):
         st.success("Doğru Tahmin!")
     else:
         st.error("Yanlış Tahmin!")
-    # Makaleler bölümü
-st.markdown('<h2 style="color: #9b59b6; text-align: center;">Makaleler</h2>', unsafe_allow_html=True)
 
 # Makale 1
 if st.button("Makale 1"):
