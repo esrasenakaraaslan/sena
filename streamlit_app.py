@@ -179,7 +179,7 @@ positions = ['Software Engineer', 'Data Analyst', 'Project Manager', 'Marketing 
 selected_position = st.selectbox("Pozisyon Seçiniz", positions)
 
 # Kullanıcıdan yıl seçme kutusu
-selected_year = st.date_input("Yıl Seçiniz", min_value=2020, max_value=2023)
+selected_year = st.number_input("Yıl Seçiniz", min_value=2020, max_value=2023)
 
 
 # Modeli yükle
