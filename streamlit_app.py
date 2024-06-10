@@ -216,6 +216,60 @@ if st.button("Grafikler"):
     st.markdown('</div>', unsafe_allow_html=True)
 
     st.markdown('</div>', unsafe_allow_html=True)
+    
+    # Çalışma Şekli ve Pozisyon Grafiği
+    st.markdown('<div style="background-color: #9b59b6; padding: 20px; border-radius: 10px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);"><p style="color: #f4d03f;">Çalışma şekli ve pozisyon sütunlarında en çok tekrar eden 5 pozisyonun çalışma şekillerine göre dağılımı</p></div>', unsafe_allow_html=True)
+    top_5_positions = df['Pozisyon'].value_counts().head(5).index
+    filtered_data = df[df['Pozisyon'].isin(top_5_positions)]
+    plt.figure(figsize=(10, 6))
+    sns.countplot(data=filtered_data, x='Pozisyon', hue='çalışma şekli', palette='viridis')
+    plt.title('En Çok Tekrar Eden 5 Pozisyonun Çalışma Şekillerine Göre Dağılımı')
+    plt.xlabel('Pozisyon')
+    plt.ylabel('Sayı')
+    st.pyplot(plt)
+    # En çok tekrar eden konumlar ve pozisyonlar
+    en_cok_tekrar_edilen_konumlar = df['Konum'].value_counts().head(10).index
+    en_cok_tekrar_edilen_pozisyonlar = df['Pozisyon'].value_counts().head(10).index
+
+    # Filtrelenmiş veri
+    filtrelenmis_veri = df[
+        df['Konum'].isin(en_cok_tekrar_edilen_konumlar) & 
+        df['Pozisyon'].isin(en_cok_tekrar_edilen_pozisyonlar)
+    ]
+
+    # Çapraz tablo oluştur
+    cross_table = pd.crosstab(index=filtrelenmis_veri['Konum'], columns=filtrelenmis_veri['Pozisyon'])
+    # Streamlit ile görselleştirme
+    st.markdown('<div style="background-color: #9b59b6; padding: 20px; border-radius: 10px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);"><p style="color: #f4d03f;">En Çok Tekrar Edilen İlk 10 Konum ve Pozisyon İlişkisi Heatmap</p></div>', unsafe_allow_html=True)
+    plt.figure(figsize=(10, 6))
+    sns.heatmap(cross_table, cmap='rainbow', annot=True, fmt='d', linewidths=.5)
+    plt.title('En Çok Tekrar Edilen İlk 10 Konum ve Pozisyon İlişkisi Heatmap')
+    plt.xlabel('Pozisyon')
+    plt.ylabel('Konum')
+    st.pyplot(plt)
+    # En çok tekrar eden konumlar ve çalışma şekilleri
+    en_cok_tekrar_edilen_konumlar = df['Konum'].value_counts().head(10).index
+    en_cok_tekrar_edilen_calisma_sekilleri = df['çalışma şekli'].value_counts().head(10).index
+
+    # Filtrelenmiş veri
+    filtrelenmis_veri = df[
+        df['Konum'].isin(en_cok_tekrar_edilen_konumlar) & 
+        df['çalışma şekli'].isin(en_cok_tekrar_edilen_calisma_sekilleri)
+    ]
+
+    # Çapraz tablo oluştur
+    cross_table = pd.crosstab(index=filtrelenmis_veri['Konum'], columns=filtrelenmis_veri['çalışma şekli'])
+
+    # Streamlit ile görselleştirme
+    st.markdown('<div style="background-color: #9b59b6; padding: 20px; border-radius: 10px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);"><p style="color: #f4d03f;">En Çok Tekrar Edilen İlk 10 Konum ve Çalışma Şekli İlişkisi Heatmap</p></div>', unsafe_allow_html=True)
+    plt.figure(figsize=(10, 6))
+    sns.heatmap(cross_table, cmap='rainbow', annot=True, fmt='d', linewidths=.5)
+    plt.title('En Çok Tekrar Edilen İlk 10 Konum ve Çalışma Şekli İlişkisi Heatmap')
+    plt.xlabel('Çalışma Şekli')
+    plt.ylabel('Konum')
+    st.pyplot(plt)
+ 
+
     # Makaleler bölümü
 st.markdown('<h2 style="color: #9b59b6; text-align: center;">Makaleler</h2>', unsafe_allow_html=True)
 
