@@ -142,6 +142,9 @@ st.markdown('<h2 class="subtitle">Dosya İçeriği:</h2>', unsafe_allow_html=Tru
 st.write(df)
 st.markdown('</div>', unsafe_allow_html=True)
 
+# 'DIGITURK' satırını çıkar
+df = df[df['Tarih'] != 'DIGITURK']
+
 # Tarih sütununu uygun bir tarih veri tipine dönüştürme
 df['Tarih'] = pd.to_datetime(df['Tarih'], format='%d/%m/%Y', errors='coerce')
 
