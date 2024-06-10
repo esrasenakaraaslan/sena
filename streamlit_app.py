@@ -154,14 +154,23 @@ if st.session_state.meslek_gruplari_acik:
     # Veri setinden pozisyonları al ve benzersiz olanları seç
     unique_positions = df['Pozisyon'].unique()
 
-    # Meslek gruplarının sayısını çiçek şeklinde gösteren başlık
+   # Meslek gruplarının sayısını çiçek şeklinde gösteren başlık
     st.markdown(f'''
     <div style="position: relative; width: 200px; height: 200px; margin: 20px auto;">
-        <div class="custom-bullet">
-            <span>{len(unique_positions)}</span>
+        <div style="position: absolute; width: 100px; height: 100px; background: #e67e22; border-radius: 50%; top: 50%; left: 50%; transform: translate(-50%, -50%); display: flex; align-items: center; justify-content: center; color: white; font-size: 24px;">
+            {len(unique_positions)}
         </div>
+        <div style="position: absolute; width: 50px; height: 50px; background: #e67e22; border-radius: 50%; top: 0; left: 50%; transform: translate(-50%, -50%);"></div>
+        <div style="position: absolute; width: 50px; height: 50px; background: #e67e22; border-radius: 50%; top: 50%; left: 0; transform: translate(-50%, -50%);"></div>
+        <div style="position: absolute; width: 50px; height: 50px; background: #e67e22; border-radius: 50%; top: 50%; right: 0; transform: translate(50%, -50%);"></div>
+        <div style="position: absolute; width: 50px; height: 50px; background: #e67e22; border-radius: 50%; bottom: 0; left: 50%; transform: translate(-50%, 50%);"></div>
+        <div style="position: absolute; width: 50px; height: 50px; background: #e67e22; border-radius: 50%; top: 25%; left: 25%; transform: translate(-50%, -50%);"></div>
+        <div style="position: absolute; width: 50px; height: 50px; background: #e67e22; border-radius: 50%; top: 25%; right: 25%; transform: translate(50%, -50%);"></div>
+        <div style="position: absolute; width: 50px; height: 50px; background: #e67e22; border-radius: 50%; bottom: 25%; left: 25%; transform: translate(-50%, 50%);"></div>
+        <div style="position: absolute; width: 50px; height: 50px; background: #e67e22; border-radius: 50%; bottom: 25%; right: 25%; transform: translate(50%, 50%);"></div>
     </div>
     ''', unsafe_allow_html=True)
+
 
     # Rastgele renk oluşturucu
     def random_blue_shade():
