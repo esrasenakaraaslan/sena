@@ -43,16 +43,17 @@ st.markdown(
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
             margin: 20px 0;
         }
-        .title {
-            color: #FFB6C1; /* Tatlış pembiş */
-            text-align: center;
-            font-size: 48px;
-            font-weight: bold;
-            margin-bottom: 30px;
-            background-color: rgba(255, 182, 193, 0.8); /* Saydam olmayan pembe arka plan */
-            padding: 20px;
-            border-radius: 15px;
-        }
+       .title {
+    color: #FFB6C1; /* Tatlış pembiş */
+    text-align: center;
+    font-size: 48px;
+    font-weight: bold;
+    margin-bottom: 30px;
+    background-color: rgba(255, 182, 193, 0.8); /* Saydam olmayan pembiş arka plan */
+    padding: 20px;
+    border-radius: 15px;
+}
+
         .subtitle {
             color: #ADD8E6; /* Daha açık mavi */
             text-align: center;
