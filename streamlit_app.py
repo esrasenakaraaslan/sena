@@ -150,4 +150,34 @@ if st.button("Türkiye'nin Geldiği Son Nokta", key="son_nokta_button"):
     st.markdown('</div>', unsafe_allow_html=True)
 
 if st.button("Analiz"):
-    st.markdown('<div class="content-box">', unsafe_allow_html=True
+    st.markdown('<div class="content-box">', unsafe_allow_html=True)
+    st.markdown('<h2 class="subtitle">Analiz</h2>', unsafe_allow_html=True)
+    st.markdown('<p>Burada veri analizi işlevi gelecek.</p>', unsafe_allow_html=True)
+    st.markdown('</div>', unsafe_allow_html=True)
+
+if st.button("Grafikler"):
+    st.markdown('<div class="content-box">', unsafe_allow_html=True)
+    st.markdown('<h2 class="subtitle">Grafikler</h2>', unsafe_allow_html=True)
+
+    # Konum Grafiği
+    st.markdown('<div class="chart-box">', unsafe_allow_html=True)
+    st.markdown('<h3>Konum sütununda en çok tekrar eden 5 konum</h3>', unsafe_allow_html=True)
+    top_locations = df['Konum'].value_counts().head(5)
+    st.bar_chart(top_locations)
+    st.markdown('</div>', unsafe_allow_html=True)
+
+    # Çalışma Şekli Grafiği
+    st.markdown('<div class="chart-box">', unsafe_allow_html=True)
+    st.markdown('<h3>Çalışma şekli sütunu</h3>', unsafe_allow_html=True)
+    calisma_sekli_sayilari = df['çalışma şekli'].value_counts()
+    st.bar_chart(calisma_sekli_sayilari)
+    st.markdown('</div>', unsafe_allow_html=True)
+
+    # Pozisyon Grafiği
+    st.markdown('<div class="chart-box">', unsafe_allow_html=True)
+    st.markdown('<h3>Pozisyon sütununda en çok tekrar eden 5 pozisyon</h3>', unsafe_allow_html=True)
+    top_positions = df['Pozisyon'].value_counts().head(5)
+    st.bar_chart(top_positions)
+    st.markdown('</div>', unsafe_allow_html=True)
+
+    st.markdown('</div>', unsafe_allow_html=True)
