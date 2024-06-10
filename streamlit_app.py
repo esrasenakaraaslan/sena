@@ -283,7 +283,10 @@ if st.button("Grafikler"):
     st.pyplot(plt)
 
 # Tarih sütununu uygun bir tarih veri tipine dönüştürme
-df['Tarih'] = pd.to_datetime(df['Tarih'], format='%d/%m/%Y', errors='coerce')
+df['Tarih'] = pd.to_datetime(df['Tarih'].str.replace(',', ''), format='%d/%m/%Y', errors='coerce')
+
+# Tarih sütununda virgül olduğunu varsayarak, diğer dize verileri içeren satırları işleme almayı deneyebiliriz
+ df['Tarih'] = df['Tarih'].apply(lambda x: pd.to_datetime(x.replace(',', ''), format='%d/%m/%Y', errors='coerce'))
 
 # Özellikler ve hedef değişkeni ayarla
 X = df.drop(columns=["Tarih"])
@@ -337,8 +340,6 @@ if st.button("Tahmin Et!!"):
     # Tahmin sonucunu göster
     if selected_date == predicted_date:
         st.success("Doğru Tahmin!")
-    else:
-        st.error("Yanlış Tahmin!")
 # Makale 1
 if st.button("Makale 1"):
     st.markdown('<div style="background-color: #9b59b6; padding: 20px; border-radius: 10px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);"><h3 style="color: #f4d03f;">Başlık 1</h3><p style="color: #f4d03f;">Burada makale içeriği yer alacak.</p></div>', unsafe_allow_html=True)
