@@ -21,9 +21,10 @@ st.markdown(
             font-family: 'Roboto', sans-serif;
             color: #ffffff; /* Beyaz metin */
         }
-        .stApp {
-            background-color: rgba(0, 0, 128, 0.5); /* Yarı saydam koyu mavi arka plan */
-        }
+       .stApp {
+    background-color: rgba(0, 0, 128, 0); /* Tamamen şeffaf arka plan */
+}
+
         .stButton>button {
             background-color: #FFC0CB; /* Pembiş */
             color: white;
