@@ -186,8 +186,6 @@ selected_year = st.number_input("Yıl Seçiniz", min_value=2020, max_value=2023)
 model_path = "model.joblib"
 model = joblib.load(model_path)
 
-import random
-
 # "Tahmin Et!!" butonu
 if st.button("Tahmin Et!!"):
     # Tarih tahmini için gerekli fonksiyon
@@ -197,20 +195,15 @@ if st.button("Tahmin Et!!"):
     # Tahmini tarih
     predicted_date = predict_date(model, selected_year)
     
-    # Rastgele bir pozisyon seç
-    random_position = random.choice(positions)
-    
     # Tahmin sonucunu göster
     st.write(f"Seçilen yıl: {selected_year}")
     st.write(f"Tahmini Pozisyon: {predicted_date}")
-    st.write(f"Rastgele Seçilen Pozisyon: {random_position}")
     
     # Tahmin sonucunu göster
-    if random_position == selected_position:
+    if predicted_date == selected_position:
         st.success("Doğru Tahmin!")
     else:
         st.error("Yanlış Tahmin!")
-
 
 
 # Meslek Grupları butonunun durumunu takip eden bir oturum durumu (session state) belirle
