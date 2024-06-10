@@ -42,10 +42,10 @@ st.markdown(
             font-size: 48px;
             font-weight: bold;
             margin-bottom: 30px;
-            background-image: url('hhttps://r.resimlink.com/USyYKmk.png'); /* Görsel URL'sini buraya ekleyin */
+            background-image: url('https://r.resimlink.com/USyYKmk.png'); /* Görsel URL'si */
             background-size: cover;
             background-position: center;
-            padding: 20px;
+            padding: 50px;
             border-radius: 15px;
         }
         .subtitle {
