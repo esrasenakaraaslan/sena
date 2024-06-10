@@ -64,7 +64,7 @@ st.markdown(
             border-radius: 5px;
             color: white;
             transition: transform 0.3s;
-        }
+        } 
         .position-box:hover {
             transform: scale(1.05);
         }
