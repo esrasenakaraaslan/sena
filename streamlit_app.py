@@ -189,18 +189,18 @@ model = joblib.load(model_path)
 # "Tahmin Et!!" butonu
 if st.button("Tahmin Et!!"):
     # Tarih tahmini için gerekli fonksiyon
-    def predict_date(model, position):
-        return model.predict(position.reshape(1, -1))
+    def predict_date(model, date):
+        return model.predict(date)
 
-     # Tahmini tarih
-    predicted_date = predict_date(model, np.array(selected_date).reshape(1, -1))
-    
+    # Tahmini tarih
+    predicted_date = predict_date(model, selected_date)
     
     # Tahmin sonucunu göster
     if selected_date == predicted_date:
         st.success("Doğru Tahmin!")
     else:
         st.error("Yanlış Tahmin!")
+
 
 
 # Meslek Grupları butonunun durumunu takip eden bir oturum durumu (session state) belirle
