@@ -192,7 +192,7 @@ if st.button("Tahmin Et!!"):
         return model.predict(position.reshape(1, -1))
 
     # Tahmini tarih
-    predicted_date = predict_date(model, selected_position)
+    predicted_date = predict_date(model, selected_date)
     
     # Tahmin sonucunu göster
     if selected_date == predicted_date:
