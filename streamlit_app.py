@@ -7,10 +7,6 @@ from io import BytesIO
 import joblib
 import random
 
-
-
-import streamlit as st
-
 # Uygulama ayarları
 st.set_page_config(page_title="FreshData", page_icon=":rocket:", layout="wide")
 
@@ -94,7 +90,6 @@ st.markdown('<h1 class="title">FreshData İş İlanı Sitesi</h1>', unsafe_allow
 # Örnek içerik
 st.markdown('<div class="content-box"><p>Hoş geldiniz! Burada iş ilanlarını bulabilirsiniz.</p></div>', unsafe_allow_html=True)
 
-
 # GitHub'daki Excel dosyasının URL'si
 url = "https://github.com/esrasenakaraaslan/web_sitesi/raw/main/.devcontainer/t%C3%BCm_veriler_d%C3%BCzenlenmi%C5%9F_y%C4%B1ll%C4%B1%20(4).xlsx"
 
@@ -148,7 +143,8 @@ if st.session_state.meslek_gruplari_acik:
         color = random_color()
         st.markdown(f'<div class="position-box" style="background-color: {color};">{position}</div>', unsafe_allow_html=True)
 
-    st.markdown('</div>', unsafe_allow_html=True) 
+    st.markdown('</div>', unsafe_allow_html=True)
+
 if st.button("Türkiye'nin Geldiği Son Nokta", key="son_nokta_button"):
     st.markdown('<div class="content-box">', unsafe_allow_html=True)
     st.markdown('<h2 class="subtitle">Türkiye\'nin Geldiği Son Nokta</h2>', unsafe_allow_html=True)
@@ -190,19 +186,21 @@ if st.button("Grafikler"):
 
 # Modeli Yükleme
 @st.cache(allow_output_mutation=True)
-def load_model(model_path):
-    model = joblib.load(model_path)  # Örnek olarak joblib kullanıldı, sizin modelinizin formatına göre değişebilir
+def load_model(url):
+    response = requests.get(url)
+    file = BytesIO(response.content)
+    model = joblib.load(file)  # Örnek olarak joblib kullanıldı, sizin modelinizin formatına göre değişebilir
     return model
 
-model_path = "https://github.com/esrasenakaraaslan/sena/raw/main/model%20(4)%20(3)%20(1).joblib"  # Eğitilmiş model dosyasının yolu
-model = load_model(model_path)
+model_url = "https://github.com/esrasenakaraaslan/sena/raw/main/model%20(4)%20(3)%20(1).joblib"  # Eğitilmiş model dosyasının yolu
+model = load_model(model_url)
 
 # Giriş Verisini Alın
-user_input = st.text_input("Bir metin girin:")
+konum = st.text_input("Konum:")
+pozisyon = st.text_input("Pozisyon:")
 
 # Modeli Kullanarak Tahmin Yapma
 if st.button("Tahmin Yap"):
-    prediction = model.predict([user_input])  # Giriş metni üzerinde tahmin yapın
-
-    # Sonucu Gösterme
-    st.write("Tahmin:", prediction)
+    # Tahmin işlemi yapılacak
+    prediction = model.predict([[konum, pozisyon]])  # Giriş verisi üzerinde tahmin yapın
+    st.write("İş bulma ihtimaliniz:", prediction)
