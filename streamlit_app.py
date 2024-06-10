@@ -202,7 +202,16 @@ if st.button("Analiz"):
 if st.button("Grafikler"):
     st.markdown('<div class="content-box">', unsafe_allow_html=True)
     st.markdown('<h2 class="subtitle">Grafikler</h2>', unsafe_allow_html=True)
+    # Grafik butonunun durumunu takip eden bir oturum durumu (session state) belirle
+if 'grafikler_acik' not in st.session_state:
+    st.session_state.grafikler_acik = False
 
+# Grafik butonuna tıklama durumu
+if st.button("Grafikler", key="grafikler_button"):
+    st.session_state.grafikler_acik = not st.session_state.grafikler_acik
+
+# Grafikler durumuna göre içeriği göster veya gizle
+if st.session_state.grafikler_acik:
     # Konum Grafiği
     st.markdown('<div class="chart-box">', unsafe_allow_html=True)
     st.markdown('<h3>Konum sütununda en çok tekrar eden 5 konum</h3>', unsafe_allow_html=True)
