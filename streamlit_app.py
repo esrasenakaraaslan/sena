@@ -181,18 +181,7 @@ if st.button("Grafikler"):
     st.pyplot(plt)
 if st.button("İşveren Girişi", key="isveren_girisi_button"):
     st.markdown('<div style="background-color: #9b59b6; padding: 20px; border-radius: 10px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);"><p style="color: #f4d03f;">Burada işveren giriş işlevi gelecek.</p></div>', unsafe_allow_html=True)
-# Model dosyasının URL'si
-model_url = "https://github.com/esrasenakaraaslan/sena/raw/main/.devcontainer/model%20(4).joblib"
 
-# Modeli yükle
-def load_model(url):
-    response = requests.get(url)
-    return joblib.load(BytesIO(response.content))
-
-model = load_model(model_url)
-
-# Meslek seçimini alma
-selected_position = st.selectbox("Meslek Seçiniz", df['Pozisyon'].unique())
 
 # Tahmin et butonu
 if st.button("Tahmin Et"):
