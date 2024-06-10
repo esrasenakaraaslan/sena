@@ -36,7 +36,7 @@ st.markdown(
             background-color: #1E90FF; /* Daha açık mavi */
         }
         .content-box {
-            background: rgba(0, 0, 128, 0.7); /* Yarı saydam koyu mavi */
+            background-color: rgba(0, 0, 255, 0.3); /* Açık mavi ve yarı saydam arka plan */
             padding: 20px;
             border-radius: 15px;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
