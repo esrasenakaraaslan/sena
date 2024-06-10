@@ -210,7 +210,7 @@ if st.button("Tahmin Et!!"):
         st.error("Yanlış Tahmin!")
         
 # Eğitim ve test verisi doğruluk puanları
-st.markdown('<h2 class="subtitle" style="color: #f4d03f;">Eğitim ve Test Verisi Doğruluk Puanı:</h2>', unsafe_allow_html=True)
+st.markdown('<h2 class="subtitle" style="color: red;">Eğitim ve Test Verisi Doğruluk Puanı:</h2>', unsafe_allow_html=True)
 st.write("Eğitim verisi doğruluk puanı:", train_accuracy)
 st.write("Test verisi doğruluk puanı:", test_accuracy)
 
