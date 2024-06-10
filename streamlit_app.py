@@ -7,6 +7,8 @@ from io import BytesIO
 import random
 import pickle
 import requests
+from sklearn.ensemble import RandomForestClassifier
+from sklearn.model_selection import train_test_split
 
 # Uygulama ayarları
 st.set_page_config(page_title="FreshData", page_icon=":rocket:", layout="wide")
