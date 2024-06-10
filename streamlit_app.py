@@ -173,7 +173,8 @@ joblib.dump(model, "model.joblib")
 st.title("Tarih Tahmini")
 
 # Pozisyonları al
-positions = ['Software Engineer', 'Data Analyst', 'Project Manager', 'Marketing Specialist']
+positions = df['Pozisyon'].unique()
+
 
 # Pozisyon seçme kutusu
 selected_position = st.selectbox("Pozisyon Seçiniz", positions)
