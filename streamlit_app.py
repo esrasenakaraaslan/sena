@@ -189,13 +189,13 @@ if st.button("Grafikler"):
 def load_model(url):
     response = requests.get(url)
     file = BytesIO(response.content)
-    model = joblib.load(file)  # Örnek olarak joblib kullanıldı, sizin modelinizin formatına göre değişebilir
+    model = joblib.load(file)
     return model
 
-model_url = "https://github.com/esrasenakaraaslan/sena/raw/main/model%20(4)%20(3)%20(1).joblib"  # Eğitilmiş model dosyasının yolu
+model_url = "https://github.com/esrasenakaraaslan/sena/raw/main/model%20(4)%20(3)%20(1).joblib"
 model = load_model(model_url)
 
-# Giriş Verisini Alın
+# Kullanıcı giriş verilerini al
 konum = st.text_input("Konum:")
 pozisyon = st.text_input("Pozisyon:")
 
@@ -203,7 +203,10 @@ pozisyon = st.text_input("Pozisyon:")
 if st.button("Tahmin Yap"):
     if konum and pozisyon:
         # Tahmin işlemi yapılacak
-        prediction = model.predict([[konum, pozisyon]])  # Giriş verisi üzerinde tahmin yapın
-        st.write("İş bulma ihtimaliniz:", prediction)
+        try:
+            prediction = model.predict([[konum, pozisyon]])  # Giriş verisi üzerinde tahmin yapın
+            st.write("İş bulma ihtimaliniz:", prediction)
+        except Exception as e:
+            st.write("Bir hata oluştu:", e)
     else:
         st.write("Lütfen konum ve pozisyon bilgilerini girin.")
