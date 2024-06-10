@@ -15,12 +15,11 @@ st.markdown(
     """
     <style>
         body {
-            background: url('https://r.resimlink.com/USyYKmk.png') no-repeat center center fixed;
-            background-size: cover;
+            background-color: #add8e6; /* Açık mavi */
             font-family: 'Roboto', sans-serif;
         }
         .stButton>button {
-            background-color: #ff6347;
+            background-color: #000080; /* Koyu mavi */
             color: white;
             border-radius: 10px;
             padding: 10px 20px;
@@ -28,7 +27,7 @@ st.markdown(
             transition: background-color 0.3s;
         }
         .stButton>button:hover {
-            background-color: #ff4500;
+            background-color: #1E90FF; /* Daha koyu mavi */
         }
         .content-box {
             background: rgba(255, 255, 255, 0.8);
@@ -43,7 +42,6 @@ st.markdown(
             font-size: 48px;
             font-weight: bold;
             margin-bottom: 30px;
-            padding: 50px;
             border-radius: 15px;
         }
         .subtitle {
@@ -152,6 +150,7 @@ if st.button("Analiz"):
     st.markdown('<h2 class="subtitle">Analiz</h2>', unsafe_allow_html=True)
     st.markdown('<p>Burada veri analizi işlevi gelecek.</p>', unsafe_allow_html=True)
     st.markdown('</div>', unsafe_allow_html=True)
+
 if st.button("Grafikler"):
     st.markdown('<div class="content-box">', unsafe_allow_html=True)
     st.markdown('<h2 class="subtitle">Grafikler</h2>', unsafe_allow_html=True)
