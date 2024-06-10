@@ -181,7 +181,6 @@ selected_position = st.selectbox("Pozisyon Seçiniz", positions)
 # Kullanıcıdan yıl seçme kutusu
 selected_year = st.number_input("Yıl Seçiniz", min_value=2020, max_value=2023)
 
-
 # Modeli yükle
 model_path = "model.joblib"
 model = joblib.load(model_path)
@@ -189,11 +188,15 @@ model = joblib.load(model_path)
 # "Tahmin Et!!" butonu
 if st.button("Tahmin Et!!"):
     # Tarih tahmini için gerekli fonksiyon
-    def predict_date(model, date):
-        return model.predict(date)
+    def predict_date(model, year):
+        return model.predict([[year]])
 
     # Tahmini tarih
-    predicted_date = predict_date(model, selected_date)
+    predicted_date = predict_date(model, selected_year)
+    
+    # Tahmin sonucunu göster
+    st.write(f"Seçilen yıl: {selected_year}")
+    st.write(f"Tahmini tarih: {predicted_date}")
     
     # Tahmin sonucunu göster
     if selected_date == predicted_date:
