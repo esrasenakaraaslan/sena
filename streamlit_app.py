@@ -86,7 +86,6 @@ st.markdown('<div style="background-image: url(\'https://r.resimlink.com/USyYKmk
 st.markdown('<h1 class="title" style="color: #000080;">FreshData İş İlanı Sitesi</h1>', unsafe_allow_html=True)
 st.markdown('</div>', unsafe_allow_html=True)
 
-
 # GitHub'daki Excel dosyasının URL'si
 url = "https://github.com/esrasenakaraaslan/web_sitesi/raw/main/.devcontainer/t%C3%BCm_veriler_d%C3%BCzenlenmi%C5%9F_y%C4%B1ll%C4%B1%20(4).xlsx"
 
@@ -130,10 +129,8 @@ if st.session_state.meslek_gruplari_acik:
         </div>
     </div>
     ''', unsafe_allow_html=True)
+return "#{:06x}".format(random.randint(0, 0xFFFFFF))
 
-    # Rastgele renk oluşturucu
-    def random_color():
-        return "#{:06x}".format(random.randint(0, 0xFFFFFF))
 
     # Pozisyonları göster
     for position in unique_positions:
@@ -180,3 +177,24 @@ if st.button("Grafikler"):
     st.markdown('</div>', unsafe_allow_html=True)
 
     st.markdown('</div>', unsafe_allow_html=True)
+
+# Model Entegrasyonu
+@st.cache(allow_output_mutation=True)
+def load_model(model_path):
+    model = joblib.load(model_path)  # Eğitilmiş modeli yükleme
+    return model
+
+model_path = "model.joblib"  # Eğitilmiş modelin yolu
+model = load_model(model_path)
+
+# Giriş Verisini Hazırlama
+# Kullanıcıdan girdileri alın
+
+# Tahmin Yapma
+if st.button("Tahmin Yap"):
+    # Girdileri modele vererek tahmin yapın
+    prediction = model.predict(girdiler)
+
+    # Tahmin sonuçlarını gösterin
+    st.write("Tahmin:", prediction)
+
