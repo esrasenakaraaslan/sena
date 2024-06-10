@@ -282,6 +282,9 @@ if st.button("Grafikler"):
     plt.ylabel('Konum')
     st.pyplot(plt)
 
+# Tarih sütununu uygun bir tarih veri tipine dönüştürme
+df['Tarih'] = pd.to_datetime(df['Tarih'], format='%d/%m/%Y', errors='coerce')
+
 # Virgülle ayrılmış tarihleri uygun formata dönüştürme
 df['Tarih'] = df['Tarih'].str.replace(',', '')
 
