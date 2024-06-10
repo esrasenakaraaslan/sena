@@ -1,4 +1,4 @@
-[16:04, 10.06.2024] ‘reyyan: import streamlit as st
+import streamlit as st
 import pandas as pd
 import seaborn as sns
 import matplotlib.pyplot as plt
