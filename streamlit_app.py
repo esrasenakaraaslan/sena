@@ -137,11 +137,11 @@ def load_data(url):
 # Veriyi yükle
 df = load_data(url)
 
-# Veriyi görüntüleme
+# Dosya İçeriği
 st.markdown('<div class="content-box">', unsafe_allow_html=True)
 st.markdown('<h2 class="subtitle">Dosya İçeriği:</h2>', unsafe_allow_html=True)
 st.write(df)
-st.markdown('</div>', unsafe_allow_html=True)
+st.markdown('</div>', unsafe_allow_html=True
 
 # 'DIGITURK' satırını çıkar
 df = df[df['Tarih'] != 'DIGITURK']
@@ -176,11 +176,16 @@ st.title("Tarih Tahmini")
 positions = df['Pozisyon'].unique()
 
 
-# Pozisyon seçme kutusu
+# Pozisyon Seçme Kutusu
+st.markdown('<div class="position-box">', unsafe_allow_html=True)
 selected_position = st.selectbox("Pozisyon Seçiniz", positions)
+st.markdown('</div>', unsafe_allow_html=True)
 
-# Kullanıcıdan yıl seçme kutusu
+
+# Yıl Seçme Kutusu
+st.markdown('<div class="position-box">', unsafe_allow_html=True)
 selected_year = st.number_input("Yıl Seçiniz", min_value=2020, max_value=2023)
+st.markdown('</div>', unsafe_allow_html=True)
 
 # Modeli yükle
 model_path = "model.joblib"
@@ -203,7 +208,12 @@ if st.button("Tahmin Et!!"):
         st.success("Doğru Tahmin!")
     else:
         st.error("Yanlış Tahmin!")
-
+    # Eğitim ve test verisi doğruluk puanları
+st.markdown('<div class="content-box">', unsafe_allow_html=True)
+st.markdown('<h2 class="subtitle" style="color: #f4d03f;">Eğitim ve Test Verisi Doğruluk Puanı:</h2>', unsafe_allow_html=True)
+st.write("Eğitim verisi doğruluk puanı:", train_accuracy)
+st.write("Test verisi doğruluk puanı:", test_accuracy)
+st.markdown('</div>', unsafe_allow_html=True)
 
 
 # Meslek Grupları butonunun durumunu takip eden bir oturum durumu (session state) belirle
