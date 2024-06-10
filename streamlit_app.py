@@ -250,3 +250,4 @@ if st.button("İşveren Girişi", key="isveren_girisi_button"):
 
 # Footer
 st.markdown('<p style="text-align: center; font-size: 12px; color: #ffffff;">© 2024 FreshData. Tüm hakları saklıdır.</p>', unsafe_allow_html=True)
+
