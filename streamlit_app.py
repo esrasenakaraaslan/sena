@@ -283,15 +283,9 @@ if st.button("Grafikler"):
     st.pyplot(plt)
 
 # Tarih sütununu uygun bir tarih veri tipine dönüştürme
-df['Tarih'] = pd.to_datetime(df['Tarih'], format='%d/%m/%Y', errors='coerce')
+df['Tarih'] = pd.to_datetime(df['Tarih'].str.replace(',', ''), format='%d/%m/%Y', errors='coerce')
 
-# Virgülle ayrılmış tarihleri uygun formata dönüştürme
-df['Tarih'] = df['Tarih'].str.replace(',', '')
-
-# Tarih sütununu uygun bir tarih veri tipine dönüştürme
-df['Tarih'] = pd.to_datetime(df['Tarih'], format='%d/%m/%Y')
-
-  # Özellikler ve hedef değişkeni ayarla
+# Özellikler ve hedef değişkeni ayarla
 X = df.drop(columns=["Tarih"])
 y = df["Tarih"]
 
