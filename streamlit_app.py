@@ -210,8 +210,8 @@ if st.button("Tahmin Et!!"):
         st.error("Yanlış Tahmin!")
    # Eğitim ve test verisi doğruluk puanları
 st.markdown('<div class="content-box">', unsafe_allow_html=True)
-st.markdown('<h2 class="subtitle" style="color: #f4d03f;">Eğitim ve Test Verisi Doğruluk Puanı:</h2>', unsafe_allow_html=True)
 st.markdown('<div style="background-color: #1E90FF; padding: 20px; border-radius: 10px;">', unsafe_allow_html=True)
+st.markdown('<h2 class="subtitle" style="color: #f4d03f;">Eğitim ve Test Verisi Doğruluk Puanı:</h2>', unsafe_allow_html=True)
 st.write("Eğitim verisi doğruluk puanı:", train_accuracy)
 st.write("Test verisi doğruluk puanı:", test_accuracy)
 st.markdown('</div>', unsafe_allow_html=True) # Lacivert kutu için kapanış etiketini ekleyin
