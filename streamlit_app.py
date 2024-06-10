@@ -9,6 +9,8 @@ import random
 
 
 
+import streamlit as st
+
 # Uygulama ayarları
 st.set_page_config(page_title="FreshData", page_icon=":rocket:", layout="wide")
 
@@ -35,7 +37,7 @@ st.markdown(
             background-color: #1E90FF; /* Daha koyu mavi */
         }
         .content-box {
-            background: rgba(255, 255, 255, 0.8);
+            background: rgba(173, 216, 230, 0.8); /* Tatlı mavi */
             padding: 20px;
             border-radius: 15px;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
@@ -92,10 +94,6 @@ st.markdown('<h1 class="title">FreshData İş İlanı Sitesi</h1>', unsafe_allow
 # Örnek içerik
 st.markdown('<div class="content-box"><p>Hoş geldiniz! Burada iş ilanlarını bulabilirsiniz.</p></div>', unsafe_allow_html=True)
 
-# Başlık
-st.markdown('<div style="background-image: url(\'https://r.resimlink.com/USyYKmk.png\'); background-size: cover; padding: 50px; border-radius: 15px;">', unsafe_allow_html=True)
-st.markdown('<h1 class="title" style="color: #000080;">FreshData İş İlanı Sitesi</h1>', unsafe_allow_html=True)
-st.markdown('</div>', unsafe_allow_html=True)
 
 # GitHub'daki Excel dosyasının URL'si
 url = "https://github.com/esrasenakaraaslan/web_sitesi/raw/main/.devcontainer/t%C3%BCm_veriler_d%C3%BCzenlenmi%C5%9F_y%C4%B1ll%C4%B1%20(4).xlsx"
