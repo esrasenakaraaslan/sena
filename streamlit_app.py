@@ -6,8 +6,6 @@ import requests
 from io import BytesIO
 import joblib
 import random
-from sklearn.preprocessing import OneHotEncoder
-from sklearn.compose import ColumnTransformer
 
 # Uygulama ayarları
 st.set_page_config(page_title="FreshData", page_icon=":rocket:", layout="wide")
@@ -101,23 +99,96 @@ def load_data(url):
 # Veriyi yükle
 df = load_data(url)
 
-# Modeli yükle
+# Veriyi görüntüleme
+st.markdown('<div class="content-box">', unsafe_allow_html=True)
+st.markdown('<h2 class="subtitle">Dosya İçeriği:</h2>', unsafe_allow_html=True)
+st.write(df)
+st.markdown('</div>', unsafe_allow_html=True)
+
+# Meslek Grupları butonunun durumunu takip eden bir oturum durumu (session state) belirle
+if 'meslek_gruplari_acik' not in st.session_state:
+    st.session_state.meslek_gruplari_acik = False
+
+# Meslek Grupları butonuna tıklama durumu
+if st.button("Meslek Grupları", key="meslek_grupları_button"):
+    st.session_state.meslek_gruplari_acik = not st.session_state.meslek_gruplari_acik
+
+# Meslek Grupları durumuna göre içeriği göster veya gizle
+if st.session_state.meslek_gruplari_acik:
+    st.markdown('<div class="content-box">', unsafe_allow_html=True)
+    st.markdown('<h2 class="subtitle">Meslek Grupları</h2>', unsafe_allow_html=True)
+
+    # Veri setinden pozisyonları al ve benzersiz olanları seç
+    unique_positions = df['Pozisyon'].unique()
+
+    # Meslek gruplarının sayısını çiçek şeklinde gösteren başlık
+    st.markdown(f'''
+    <div style="position: relative; width: 200px; height: 200px; margin: 20px auto;">
+        <div class="custom-bullet">
+            {len(unique_positions)}
+        </div>
+    </div>
+    ''', unsafe_allow_html=True)
+
+    # Rastgele renk oluşturucu
+    def random_color():
+        return "#{:06x}".format(random.randint(0, 0xFFFFFF))
+
+    # Pozisyonları göster
+    for position in unique_positions:
+        color = random_color()
+        st.markdown(f'<div class="position-box" style="background-color: {color};">{position}</div>', unsafe_allow_html=True)
+
+    st.markdown('</div>', unsafe_allow_html=True) 
+if st.button("Türkiye'nin Geldiği Son Nokta", key="son_nokta_button"):
+    st.markdown('<div class="content-box">', unsafe_allow_html=True)
+    st.markdown('<h2 class="subtitle">Türkiye\'nin Geldiği Son Nokta</h2>', unsafe_allow_html=True)
+    st.markdown('<p>Burada Türkiye\'nin geldiği son noktayla ilgili bilgiler yer alacak.</p>', unsafe_allow_html=True)
+    st.markdown('</div>', unsafe_allow_html=True)
+
+if st.button("Analiz"):
+    st.markdown('<div class="content-box">', unsafe_allow_html=True)
+    st.markdown('<h2 class="subtitle">Analiz</h2>', unsafe_allow_html=True)
+    st.markdown('<p>Burada veri analizi işlevi gelecek.</p>', unsafe_allow_html=True)
+    st.markdown('</div>', unsafe_allow_html=True)
+
+if st.button("Grafikler"):
+    st.markdown('<div class="content-box">', unsafe_allow_html=True)
+    st.markdown('<h2 class="subtitle">Grafikler</h2>', unsafe_allow_html=True)
+
+    # Konum Grafiği
+    st.markdown('<div class="chart-box">', unsafe_allow_html=True)
+    st.markdown('<h3>Konum sütununda en çok tekrar eden 5 konum</h3>', unsafe_allow_html=True)
+    top_locations = df['Konum'].value_counts().head(5)
+    st.bar_chart(top_locations)
+    st.markdown('</div>', unsafe_allow_html=True)
+
+    # Çalışma Şekli Grafiği
+    st.markdown('<div class="chart-box">', unsafe_allow_html=True)
+    st.markdown('<h3>Çalışma şekli sütunu</h3>', unsafe_allow_html=True)
+    calisma_sekli_sayilari = df['çalışma şekli'].value_counts()
+    st.bar_chart(calisma_sekli_sayilari)
+    st.markdown('</div>', unsafe_allow_html=True)
+
+    # Pozisyon Grafiği
+    st.markdown('<div class="chart-box">', unsafe_allow_html=True)
+    st.markdown('<h3>Pozisyon sütununda en çok tekrar eden 5 pozisyon</h3>', unsafe_allow_html=True)
+    top_positions = df['Pozisyon'].value_counts().head(5)
+    st.bar_chart(top_positions)
+    st.markdown('</div>', unsafe_allow_html=True)
+
+    st.markdown('</div>', unsafe_allow_html=True)
+
+# Modeli yükleme
 model = joblib.load("model.joblib")
 
-# Kullanıcı girişleri
-konum = st.text_input("Konum")
-pozisyon = st.text_input("Pozisyon")
+# Kullanıcıdan girdileri al
+konum = st.text_input("Konum:", "")
+pozisyon = st.text_input("Pozisyon:", "")
 
-# Kullanıcı girişlerini modele uygun formata dönüştürme
-user_input = pd.DataFrame({'Konum': [konum], 'Pozisyon': [pozisyon]})
-
-# One-Hot Encoding
-categorical_features = ['Konum', 'Pozisyon']
-preprocessor = ColumnTransformer(transformers=[('cat', OneHotEncoder(), categorical_features)], remainder='passthrough')
-user_input_encoded = preprocessor.fit_transform(user_input)
-
-# İş bulma ihtimalini tahmin etme
-prediction = model.predict_proba(user_input_encoded)[0][1] * 100
-
-# Sonucu gösterme
-st.write(f"İş bulma ihtimali: %{prediction:.2f}")
+# Kullanıcı girdileriyle tahmin yap
+if st.button("Tahmin Et"):
+    # Tahmin işlemi yapılacak
+    # Örnek olarak:
+    tahmin = model.predict_proba([[konum, pozisyon]])
+    st.write("İş bulma ihtimaliniz:", tahmin)
