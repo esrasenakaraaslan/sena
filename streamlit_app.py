@@ -25,7 +25,7 @@ st.markdown(
             background-color: rgba(0, 0, 255, 0); /* Tamamen saydam arka plan */
          }
         .stButton>button {
-            background-color: #000080; /* Koyu mavi */
+             background-color: #FFFF00; /* Sarı renk (RGB: 255, 255, 0) */
             color: white;
             border-radius: 10px;
             padding: 10px 20px;
