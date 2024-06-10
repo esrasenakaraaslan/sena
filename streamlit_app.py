@@ -142,6 +142,7 @@ st.markdown('<h2 class="subtitle">Dosya İçeriği:</h2>', unsafe_allow_html=Tru
 st.write(df)
 st.markdown('</div>', unsafe_allow_html=True)
 
+
 # Meslek Grupları butonunun durumunu takip eden bir oturum durumu (session state) belirle
 if 'meslek_gruplari_acik' not in st.session_state:
     st.session_state.meslek_gruplari_acik = False
@@ -281,6 +282,27 @@ if st.button("Grafikler"):
     plt.ylabel('Konum')
     st.pyplot(plt)
 
+  # Özellikler ve hedef değişkeni ayarla
+X = df.drop(columns=["Tarih"])
+y = df["Tarih"]
+
+# Eğitim ve test verilerine ayır
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
+
+# Modeli oluştur ve eğit
+model = RandomForestClassifier()
+model.fit(X_train, y_train)
+
+# Modelin performansını değerlendir
+train_accuracy = model.score(X_train, y_train)
+test_accuracy = model.score(X_test, y_test)
+st.write("Eğitim verisi doğruluk puanı:", train_accuracy)
+st.write("Test verisi doğruluk puanı:", test_accuracy)
+
+# Eğitilmiş modeli kaydet
+import joblib
+joblib.dump(model, "model.joblib")
+
 # Başlık
 st.title("Tarih Tahmini")
 
@@ -293,30 +315,19 @@ selected_position = st.selectbox("Pozisyon Seçiniz", positions)
 # Kullanıcıdan tarih seçme kutusu
 selected_date = st.date_input("Tarih Seçiniz")
 
-# Modelin URL'si
-model_url = "https://github.com/esrasenakaraaslan/web_sitesi/raw/main/.devcontainer/model.pkl"
-
-# Modeli indir
-response = requests.get(model_url)
-
-# İndirilen model dosyasını açma
-with open("model.pkl", "wb") as f:
-    f.write(response.content)
-
 # Modeli yükle
-with open("model.pkl", "rb") as f:
-    model = pickle.load(f)
+model_path = "model.joblib"
+model = joblib.load(model_path)
 
 # "Tahmin Et!!" butonu
 if st.button("Tahmin Et!!"):
-    
     # Tarih tahmini için gerekli fonksiyon
     def predict_date(model, position):
-        return model.predict(position)
+        return model.predict(position.reshape(1, -1))
 
     # Tahmini tarih
     predicted_date = predict_date(model, selected_position)
-
+    
     # Tahmin sonucunu göster
     if selected_date == predicted_date:
         st.success("Doğru Tahmin!")
