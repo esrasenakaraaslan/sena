@@ -7,6 +7,8 @@ from io import BytesIO
 import joblib
 import random
 
+
+
 # Uygulama ayarları
 st.set_page_config(page_title="FreshData", page_icon=":rocket:", layout="wide")
 
@@ -15,7 +17,10 @@ st.markdown(
     """
     <style>
         body {
-            background-color: #add8e6; /* Açık mavi */
+            background-image: url('https://r.resimlink.com/USyYKmk.png');
+            background-size: cover;
+            background-repeat: no-repeat;
+            background-attachment: fixed;
             font-family: 'Roboto', sans-serif;
         }
         .stButton>button {
@@ -80,6 +85,12 @@ st.markdown(
     """,
     unsafe_allow_html=True
 )
+
+# Başlık
+st.markdown('<h1 class="title">FreshData İş İlanı Sitesi</h1>', unsafe_allow_html=True)
+
+# Örnek içerik
+st.markdown('<div class="content-box"><p>Hoş geldiniz! Burada iş ilanlarını bulabilirsiniz.</p></div>', unsafe_allow_html=True)
 
 # Başlık
 st.markdown('<div style="background-image: url(\'https://r.resimlink.com/USyYKmk.png\'); background-size: cover; padding: 50px; border-radius: 15px;">', unsafe_allow_html=True)
