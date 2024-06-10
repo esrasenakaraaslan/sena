@@ -43,16 +43,17 @@ st.markdown(
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
             margin: 20px 0;
         }
-       .title {
+   .title {
     color: #FFB6C1; /* Tatlış pembiş */
     text-align: center;
     font-size: 48px;
     font-weight: bold;
     margin-bottom: 30px;
-    background-color: rgba(255, 182, 193, 0.8); /* Saydam olmayan pembiş arka plan */
+    background-color: #FF69B4; /* Daha koyu pembe */
     padding: 20px;
     border-radius: 15px;
 }
+
 
         .subtitle {
             color: #ADD8E6; /* Daha açık mavi */
