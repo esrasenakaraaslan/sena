@@ -149,15 +149,11 @@ df = df[df['Tarih'] != 'DIGITURK']
 df['Tarih'] = pd.to_datetime(df['Tarih'], format='%d/%m/%Y', errors='coerce')
 
 # Özellikler ve hedef değişkeni ayarla
-X = df.drop(columns=["Tarih"])
-y = df["Tarih"]
+X = df[['Tarih']]  # 'Tarih' sütunu bağımsız değişken
+y = df['Pozisyon']  # 'Pozisyon' sütunu hedef değişken
 
 # Eğitim ve test verilerine ayır
 X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
-st.write("X_train shape:", X_train.shape)
-st.write("y_train shape:", y_train.shape)
-st.write("X_train sample:", X_train.head())
-st.write("y_train sample:", y_train.head())
 
 # Modeli oluştur ve eğit
 model = RandomForestClassifier()
