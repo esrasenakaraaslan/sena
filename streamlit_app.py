@@ -200,7 +200,7 @@ if st.button("Analiz"):
     st.markdown('</div>', unsafe_allow_html=True)
 
 
-    # Grafik butonunun durumunu takip eden bir oturum durumu (session state) belirle
+  # Grafik butonunun durumunu takip eden bir oturum durumu (session state) belirle
 if 'grafikler_acik' not in st.session_state:
     st.session_state.grafikler_acik = False
 
@@ -210,8 +210,6 @@ if st.button("Grafikler", key="grafikler_button"):
 
 # Grafikler durumuna göre içeriği göster veya gizle
 if st.session_state.grafikler_acik:
-    st.markdown('<div class="content-box">', unsafe_allow_html=True)
-    st.markdown('<h2 class="subtitle">Grafikler</h2>', unsafe_allow_html=True)
 
     
 if st.button("Grafikler"):
