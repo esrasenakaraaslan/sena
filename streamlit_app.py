@@ -178,8 +178,9 @@ positions = ['Software Engineer', 'Data Analyst', 'Project Manager', 'Marketing 
 # Pozisyon seçme kutusu
 selected_position = st.selectbox("Pozisyon Seçiniz", positions)
 
-# Kullanıcıdan tarih seçme kutusu
-selected_date = st.date_input("Tarih Seçiniz")
+# Kullanıcıdan yıl seçme kutusu
+selected_year = st.date_input("Yıl Seçiniz", min_value=2020, max_value=2023)
+
 
 # Modeli yükle
 model_path = "model.joblib"
