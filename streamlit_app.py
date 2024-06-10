@@ -151,8 +151,7 @@ if st.button("Analiz"):
     st.markdown('<div class="content-box">', unsafe_allow_html=True)
     st.markdown('<h2 class="subtitle">Analiz</h2>', unsafe_allow_html=True)
     st.markdown('<p>Burada veri analizi işlevi gelecek.</p>', unsafe_allow_html=True)
-    st.markdown('</div>',unsafe_allow_html=True)
-
+    st.markdown('</div>', unsafe_allow_html=True)
 if st.button("Grafikler"):
     st.markdown('<div class="content-box">', unsafe_allow_html=True)
     st.markdown('<h2 class="subtitle">Grafikler</h2>', unsafe_allow_html=True)
@@ -179,4 +178,3 @@ if st.button("Grafikler"):
     st.markdown('</div>', unsafe_allow_html=True)
 
     st.markdown('</div>', unsafe_allow_html=True)
-
