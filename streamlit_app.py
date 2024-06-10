@@ -26,7 +26,7 @@ st.markdown(
          }
         .stButton>button {
             color: #FF69B4; /* Koyu pembe renk (RGB: 255, 105, 180) */
-            color: white;
+            color: #FF1493; /* Pembe rengi (RGB: 255, 20, 147) */
             border-radius: 10px;
             padding: 10px 20px;
             font-size: 16px;
