@@ -201,6 +201,9 @@ pozisyon = st.text_input("Pozisyon:")
 
 # Modeli Kullanarak Tahmin Yapma
 if st.button("Tahmin Yap"):
-    # Tahmin işlemi yapılacak
-    prediction = model.predict([[konum, pozisyon]])  # Giriş verisi üzerinde tahmin yapın
-    st.write("İş bulma ihtimaliniz:", prediction)
+    if konum and pozisyon:
+        # Tahmin işlemi yapılacak
+        prediction = model.predict([[konum, pozisyon]])  # Giriş verisi üzerinde tahmin yapın
+        st.write("İş bulma ihtimaliniz:", prediction)
+    else:
+        st.write("Lütfen konum ve pozisyon bilgilerini girin.")
