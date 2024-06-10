@@ -293,7 +293,8 @@ y = df["Tarih"]
 X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
 st.write("X_train shape:", X_train.shape)
 st.write("y_train shape:", y_train.shape)
-
+st.write("X_train sample:", X_train.head())
+st.write("y_train sample:", y_train.head())
 
 # Modeli oluştur ve eğit
 model = RandomForestClassifier()
