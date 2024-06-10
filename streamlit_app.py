@@ -196,10 +196,10 @@ if st.button("Tahmin Et!!"):
     
     # Tahmin sonucunu göster
     st.write(f"Seçilen yıl: {selected_year}")
-    st.write(f"Tahmini tarih: {predicted_date}")
+    st.write(f"Tahmini Pozisyon: {predicted_date}")
     
     # Tahmin sonucunu göster
-    if selected_date == predicted_date:
+    if selected_position == predicted_date:
         st.success("Doğru Tahmin!")
     else:
         st.error("Yanlış Tahmin!")
