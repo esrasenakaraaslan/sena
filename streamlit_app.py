@@ -22,32 +22,35 @@ st.markdown(
             color: #ffffff; /* Beyaz metin */
         }
         .stApp {
-            background-color: rgba(0, 0, 255, 0); /* Tamamen saydam arka plan */
-         }
+            background-color: rgba(0, 0, 128, 0.5); /* Yarı saydam koyu mavi arka plan */
+        }
         .stButton>button {
-            color: #FF69B4; /* Koyu pembe renk (RGB: 255, 105, 180) */
-            color: #FF1493; /* Pembe rengi (RGB: 255, 20, 147) */
+            background-color: #FFC0CB; /* Pembiş */
+            color: white;
             border-radius: 10px;
             padding: 10px 20px;
             font-size: 16px;
             transition: background-color 0.3s;
         }
         .stButton>button:hover {
-            background-color: #1E90FF; /* Daha açık mavi */
+            background-color: #FF69B4; /* Daha koyu pembe */
         }
         .content-box {
-            background-color: rgba(0, 0, 255, 0.3); /* Açık mavi ve yarı saydam arka plan */
+            background: rgba(0, 0, 128, 0.7); /* Yarı saydam koyu mavi */
             padding: 20px;
             border-radius: 15px;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
             margin: 20px 0;
         }
         .title {
-            color: #FF1493; /* Pembe rengi (RGB: 255, 20, 147) */
+            color: #FFB6C1; /* Tatlış pembiş */
             text-align: center;
             font-size: 48px;
             font-weight: bold;
             margin-bottom: 30px;
+            background-color: rgba(255, 182, 193, 0.8); /* Saydam olmayan pembe arka plan */
+            padding: 20px;
+            border-radius: 15px;
         }
         .subtitle {
             color: #ADD8E6; /* Daha açık mavi */
@@ -56,15 +59,33 @@ st.markdown(
             margin-bottom: 20px;
         }
         .custom-bullet {
-            background-color: #f4d03f;
+            background-color: #FFC0CB; /* Pembiş */
             color: #333;
-            padding: 10px;
+            padding: 30px; /* Boyutunu büyüttüm */
             border-radius: 50%;
             display: inline-block;
             margin: 0 10px;
+            position: relative;
+        }
+        .custom-bullet:before {
+            content: '✿';
+            color: #FFC0CB; /* Çiçek simgesi pembe */
+            font-size: 50px;
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 0;
+        }
+        .custom-bullet span {
+            position: relative;
+            z-index: 1;
         }
         .position-box {
-            background-color: #1E90FF;
             padding: 10px;
             margin: 5px;
             border-radius: 5px;
@@ -132,18 +153,22 @@ if st.session_state.meslek_gruplari_acik:
     st.markdown(f'''
     <div style="position: relative; width: 200px; height: 200px; margin: 20px auto;">
         <div class="custom-bullet">
-            {len(unique_positions)}
+            <span>{len(unique_positions)}</span>
         </div>
     </div>
     ''', unsafe_allow_html=True)
 
     # Rastgele renk oluşturucu
-    def random_color():
-        return "#{:06x}".format(random.randint(0, 0xFFFFFF))
+    def random_blue_shade():
+        blue_shades = [
+            '#ADD8E6', '#B0E0E6', '#AFEEEE', '#87CEEB', '#87CEFA', 
+            '#00BFFF', '#1E90FF', '#6495ED', '#4682B4', '#4169E1'
+        ]
+        return random.choice(blue_shades)
 
     # Pozisyonları göster
     for position in unique_positions:
-        color = random_color()
+        color = random_blue_shade()
         st.markdown(f'<div class="position-box" style="background-color: {color};">{position}</div>', unsafe_allow_html=True)
 
     st.markdown('</div>', unsafe_allow_html=True)
