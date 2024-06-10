@@ -15,9 +15,7 @@ st.markdown(
     """
     <style>
         body {
-            background-image: url('https://r.resimlink.com/USyYKmk.png'); /* Görsel URL'si */
-            background-size: cover;
-            background-repeat: no-repeat;
+            background: linear-gradient(to right, #8360c3, #2ebf91);
             font-family: 'Roboto', sans-serif;
         }
         .stButton>button {
@@ -44,6 +42,9 @@ st.markdown(
             font-size: 48px;
             font-weight: bold;
             margin-bottom: 30px;
+            background-image: url('https://r.resimlink.com/USyYKmk.png'); /* Görsel URL'si */
+            background-size: cover;
+            background-position: center;
             padding: 50px;
             border-radius: 15px;
         }
@@ -149,105 +150,4 @@ if st.button("Türkiye'nin Geldiği Son Nokta", key="son_nokta_button"):
     st.markdown('</div>', unsafe_allow_html=True)
 
 if st.button("Analiz"):
-    st.markdown('<div class="content-box">', unsafe_allow_html=True)
-    st.markdown('<h2 class="subtitle">Analiz</h2>', unsafe_allow_html=True)
-    st.markdown('<p>Burada veri analizi işlevi gelecek.</p>', unsafe_allow_html=True)
-    st.markdown('</div>', unsafe_allow_html=True)
-
-if st.button("Grafikler"):
     st.markdown('<div class="content-box">', unsafe_allow_html=True
-    st.markdown('<h2 class="subtitle">Grafikler</h2>', unsafe_allow_html=True)
-
-    # Konum Grafiği
-    st.markdown('<div class="chart-box">', unsafe_allow_html=True)
-    st.markdown('<h3 class="subtitle">Konum sütununda en çok tekrar eden 5 konum</h3>', unsafe_allow_html=True)
-    top_locations = df['Konum'].value_counts().head(5)
-    st.bar_chart(top_locations)
-    st.markdown('</div>', unsafe_allow_html=True)
-
-    # Çalışma Şekli Grafiği
-    st.markdown('<div class="chart-box">', unsafe_allow_html=True)
-    st.markdown('<h3 class="subtitle">Çalışma şekli sütunu</h3>', unsafe_allow_html=True)
-    calisma_sekli_sayilari = df['çalışma şekli'].value_counts()
-    st.bar_chart(calisma_sekli_sayilari)
-    st.markdown('</div>', unsafe_allow_html=True)
-
-    # Pozisyon Grafiği
-    st.markdown('<div class="chart-box">', unsafe_allow_html=True)
-    st.markdown('<h3 class="subtitle">Pozisyon sütununda en çok tekrar eden 20 pozisyon</h3>', unsafe_allow_html=True)
-    top_positions = df['Pozisyon'].value_counts().head(20)
-    st.bar_chart(top_positions)
-    st.markdown('</div>', unsafe_allow_html=True)
-
-    # Çalışma Şekli ve Pozisyon Grafiği
-    st.markdown('<div class="chart-box">', unsafe_allow_html=True)
-    st.markdown('<h3 class="subtitle">Çalışma şekli ve pozisyon sütunlarında en çok tekrar eden 5 pozisyonun çalışma şekillerine göre dağılımı</h3>', unsafe_allow_html=True)
-    top_5_positions = df['Pozisyon'].value_counts().head(5).index
-    filtered_data = df[df['Pozisyon'].isin(top_5_positions)]
-    plt.figure(figsize=(10, 6))
-    sns.countplot(data=filtered_data, x='Pozisyon', hue='çalışma şekli', palette='viridis')
-    plt.title('En Çok Tekrar Eden 5 Pozisyonun Çalışma Şekillerine Göre Dağılımı')
-    plt.xlabel('Pozisyon')
-    plt.ylabel('Sayı')
-    st.pyplot(plt)
-    st.markdown('</div>', unsafe_allow_html=True)
-
-    # En çok tekrar eden konumlar ve pozisyonlar
-    en_cok_tekrar_edilen_konumlar = df['Konum'].value_counts().head(10).index
-    en_cok_tekrar_edilen_pozisyonlar = df['Pozisyon'].value_counts().head(10).index
-
-    # Filtrelenmiş veri
-    filtrelenmis_veri = df[
-        df['Konum'].isin(en_cok_tekrar_edilen_konumlar) & 
-        df['Pozisyon'].isin(en_cok_tekrar_edilen_pozisyonlar)
-    ]
-
-    # Çapraz tablo oluştur
-    cross_table = pd.crosstab(index=filtrelenmis_veri['Konum'], columns=filtrelenmis_veri['Pozisyon'])
-
-    # Streamlit ile görselleştirme
-    st.markdown('<div class="chart-box">', unsafe_allow_html=True)
-    st.markdown('<h3 class="subtitle">En Çok Tekrar Edilen İlk 10 Konum ve Pozisyon İlişkisi Heatmap</h3>', unsafe_allow_html=True)
-    plt.figure(figsize=(10, 6))
-    sns.heatmap(cross_table, cmap='rainbow', annot=True, fmt='d', linewidths=.5)
-    plt.title('En Çok Tekrar Edilen İlk 10 Konum ve Pozisyon İlişkisi Heatmap')
-    plt.xlabel('Pozisyon')
-    plt.ylabel('Konum')
-    st.pyplot(plt)
-    st.markdown('</div>', unsafe_allow_html=True)
-
-    # En çok tekrar eden konumlar ve çalışma şekilleri
-    en_cok_tekrar_edilen_konumlar = df['Konum'].value_counts().head(10).index
-    en_cok_tekrar_edilen_calisma_sekilleri = df['çalışma şekli'].value_counts().head(10).index
-
-    # Filtrelenmiş veri
-    filtrelenmis_veri = df[
-        df['Konum'].isin(en_cok_tekrar_edilen_konumlar) & 
-        df['çalışma şekli'].isin(en_cok_tekrar_edilen_calisma_sekilleri)
-    ]
-
-    # Çapraz tablo oluştur
-    cross_table = pd.crosstab(index=filtrelenmis_veri['Konum'], columns=filtrelenmis_veri['çalışma şekli'])
-
-    # Streamlit ile görselleştirme
-    st.markdown('<div class="chart-box">', unsafe_allow_html=True)
-    st.markdown('<h3 class="subtitle">En Çok Tekrar Edilen İlk 10 Konum ve Çalışma Şekli İlişkisi Heatmap</h3>', unsafe_allow_html=True)
-    plt.figure(figsize=(10, 6))
-    sns.heatmap(cross_table, cmap='rainbow', annot=True, fmt='d', linewidths=.5)
-    plt.title('En Çok Tekrar Edilen İlk 10 Konum ve Çalışma Şekli İlişkisi Heatmap')
-    plt.xlabel('Çalışma Şekli')
-    plt.ylabel('Konum')
-    st.pyplot(plt)
-    st.markdown('</div>', unsafe_allow_html=True)
-
-    st.markdown('</div>', unsafe_allow_html=True)
-
-if st.button("İşveren Girişi", key="isveren_girisi_button"):
-    st.markdown('<div class="content-box">', unsafe_allow_html=True)
-    st.markdown('<h2 class="subtitle">İşveren Girişi</h2>', unsafe_allow_html=True)
-    st.markdown('<p>Burada işveren giriş işlevi gelecek.</p>', unsafe_allow_html=True)
-    st.markdown('</div>', unsafe_allow_html=True)
-
-# Footer
-st.markdown('<p style="text-align: center; font-size: 12px; color: #ffffff;">© 2024 FreshData. Tüm hakları saklıdır.</p>', unsafe_allow_html=True)
-
