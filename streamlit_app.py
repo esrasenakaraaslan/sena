@@ -4,7 +4,6 @@ import seaborn as sns
 import matplotlib.pyplot as plt
 import requests
 from io import BytesIO
-import joblib
 import random
 
 # Uygulama ayarları
@@ -20,6 +19,7 @@ st.markdown(
             background-repeat: no-repeat;
             background-attachment: fixed;
             font-family: 'Roboto', sans-serif;
+            color: #ffffff; /* Beyaz metin */
         }
         .stButton>button {
             background-color: #000080; /* Koyu mavi */
@@ -30,25 +30,24 @@ st.markdown(
             transition: background-color 0.3s;
         }
         .stButton>button:hover {
-            background-color: #1E90FF; /* Daha koyu mavi */
+            background-color: #1E90FF; /* Daha açık mavi */
         }
         .content-box {
-            background: rgba(173, 216, 230, 0.8); /* Tatlı mavi */
+            background: rgba(0, 0, 128, 0.7); /* Yarı saydam koyu mavi */
             padding: 20px;
             border-radius: 15px;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
             margin: 20px 0;
         }
         .title {
-            color: #000080; /* Koyu mavi */
+            color: #87CEFA; /* Açık mavi */
             text-align: center;
             font-size: 48px;
             font-weight: bold;
             margin-bottom: 30px;
-            border-radius: 15px;
         }
         .subtitle {
-            color: #333333;
+            color: #ADD8E6; /* Daha açık mavi */
             text-align: center;
             font-size: 24px;
             margin-bottom: 20px;
@@ -62,7 +61,7 @@ st.markdown(
             margin: 0 10px;
         }
         .position-box {
-            background-color: #e67e22;
+            background-color: #1E90FF;
             padding: 10px;
             margin: 5px;
             border-radius: 5px;
@@ -78,6 +77,7 @@ st.markdown(
             border-radius: 10px;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
             margin: 20px 0;
+            color: black; /* Grafikler için siyah metin */
         }
     </style>
     """,
@@ -183,30 +183,3 @@ if st.button("Grafikler"):
     st.markdown('</div>', unsafe_allow_html=True)
 
     st.markdown('</div>', unsafe_allow_html=True)
-
-# Modeli Yükleme
-@st.cache(allow_output_mutation=True)
-def load_model(url):
-    response = requests.get(url)
-    file = BytesIO(response.content)
-    model = joblib.load(file)
-    return model
-
-model_url = "https://github.com/esrasenakaraaslan/sena/raw/main/model%20(4)%20(3)%20(1).joblib"
-model = load_model(model_url)
-
-# Kullanıcı giriş verilerini al
-konum = st.text_input("Konum:")
-pozisyon = st.text_input("Pozisyon:")
-
-# Modeli Kullanarak Tahmin Yapma
-if st.button("Tahmin Yap"):
-    if konum and pozisyon:
-        # Tahmin işlemi yapılacak
-        try:
-            prediction = model.predict([[konum, pozisyon]])  # Giriş verisi üzerinde tahmin yapın
-            st.write("İş bulma ihtimaliniz:", prediction)
-        except Exception as e:
-            st.write("Bir hata oluştu:", e)
-    else:
-        st.write("Lütfen konum ve pozisyon bilgilerini girin.")
