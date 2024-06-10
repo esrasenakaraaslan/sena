@@ -86,25 +86,6 @@ st.markdown('<div style="background-image: url(\'https://r.resimlink.com/USyYKmk
 st.markdown('<h1 class="title" style="color: #000080;">FreshData İş İlanı Sitesi</h1>', unsafe_allow_html=True)
 st.markdown('</div>', unsafe_allow_html=True)
 
-# Modeli Yükleme
-@st.cache(allow_output_mutation=True)
-def load_model(model_path):
-    model = joblib.load(model_path)  # Örnek olarak joblib kullanıldı, sizin modelinizin formatına göre değişebilir
-    return model
-
-model_path = "model (4) (3) (1).joblib"  # Eğitilmiş model dosyasının yolu
-model = load_model(model_path)
-
-# Giriş Verisini Alın
-user_input = st.text_input("Bir metin girin:")
-
-# Modeli Kullanarak Tahmin Yapma
-if st.button("Tahmin Yap"):
-    prediction = model.predict([user_input])  # Giriş metni üzerinde tahmin yapın
-
-    # Sonucu Gösterme
-    st.write("Tahmin:", prediction)
-
 
 # GitHub'daki Excel dosyasının URL'si
 url = "https://github.com/esrasenakaraaslan/web_sitesi/raw/main/.devcontainer/t%C3%BCm_veriler_d%C3%BCzenlenmi%C5%9F_y%C4%B1ll%C4%B1%20(4).xlsx"
