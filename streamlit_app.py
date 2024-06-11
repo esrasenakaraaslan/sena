@@ -205,13 +205,7 @@ if st.button("Tahmin Et!!"):
         st.success("Doğru Tahmin!")
     else:
         st.error("Yanlış Tahmin!")
-        
-# Eğitim ve test verisi doğruluk puanları
-if st.button("Eğitim ve Test Verisi Doğruluk Puanı:"):
-    st.markdown('<div style="color: red;">Eğitim verisi doğruluk puanı:</div>', unsafe_allow_html=True)
-    st.markdown(f'<div style="color: red;">{train_accuracy}</div>', unsafe_allow_html=True)
-    st.markdown('<div style="color: red;">Test verisi doğruluk puanı:</div>', unsafe_allow_html=True)
-    st.markdown(f'<div style="color: red;">{test_accuracy}</div>', unsafe_allow_html=True) 
+   
     
 # Meslek Grupları butonunun durumunu takip eden bir oturum durumu (session state) belirle
 if 'meslek_gruplari_acik' not in st.session_state:
@@ -353,13 +347,13 @@ if st.button("Grafikler"):
     st.pyplot(plt)
 
 # Makale 1
-if st.button("Makale 1"):
+"""if st.button("Makale 1"):
     st.markdown('<div style="background-color: #9b59b6; padding: 20px; border-radius: 10px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);"><h3 style="color: #f4d03f;">Başlık 1</h3><p style="color: #f4d03f;">Burada makale içeriği yer alacak.</p></div>', unsafe_allow_html=True)
 
 # Makale 2
 if st.button("Makale 2"):
     st.markdown('<div style="background-color: #9b59b6; padding: 20px; border-radius: 10px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);"><h3 style="color: #f4d03f;">Başlık 2</h3><p style="color: #f4d03f;">Burada makale içeriği yer alacak.</p></div>', unsafe_allow_html=True)
-
+"""
 # Hakkımızda bölümü
 if st.button("Hakkımızda"):
     st.markdown('''
