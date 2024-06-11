@@ -139,7 +139,6 @@ df = load_data(url)
 
 # Dosya İçeriği
 st.markdown('<div class="content-box">', unsafe_allow_html=True)
-st.markdown('<h2 class="subtitle">Dosya İçeriği:</h2>', unsafe_allow_html=True)
 st.write(df)
 st.markdown('</div>', unsafe_allow_html=True)
 
