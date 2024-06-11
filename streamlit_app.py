@@ -206,12 +206,12 @@ if st.button("Tahmin Et!!"):
     else:
         st.error("Yanlış Tahmin!")
         
-if st.button("Eğitim ve Test Verisi Doğruluk Puanı:"):
-    st.markdown('<div style="color: red;">Eğitim verisi doğruluk puanı:</div>', unsafe_allow_html=True)
-    st.markdown(f'<div style="color: red;">{train_accuracy}</div>', unsafe_allow_html=True)
-    st.markdown('<div style="color: red;">Test verisi doğruluk puanı:</div>', unsafe_allow_html=True)
-    st.markdown(f'<div style="color: red;">{test_accuracy}</div>', unsafe_allow_html=True)
-    
+if st.button("Eğitim ve Test Verisi Doğruluk Puanı Göster"):
+    if st.button("Eğitim verisi doğruluk puanı"):
+        st.markdown(f'<div style="color: red;">Eğitim verisi doğruluk puanı: {train_accuracy}</div>', unsafe_allow_html=True)
+    if st.button("Test verisi doğruluk puanı"):
+        st.markdown(f'<div style="color: red;">Test verisi doğruluk puanı: {test_accuracy}</div>', unsafe_allow_html=True)
+
 
 
 # Meslek Grupları butonunun durumunu takip eden bir oturum durumu (session state) belirle
