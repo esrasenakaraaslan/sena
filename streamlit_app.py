@@ -167,7 +167,7 @@ test_accuracy = model.score(X_test, y_test)
 joblib.dump(model, "model.joblib")
 
 # Başlık
-st.title("Tarih Tahmini")
+st.title("GELECEKTE BİLİŞİM SEKTÖRÜ")
 
 # Pozisyonları al
 positions = df['Pozisyon'].unique()
