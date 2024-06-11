@@ -148,11 +148,9 @@ df = df[df['Tarih'] != 'DIGITURK']
 # Tarih sütununu uygun bir tarih veri tipine dönüştürme
 df['Tarih'] = pd.to_datetime(df['Tarih'], format='%d/%m/%Y', errors='coerce')
 
-df=pd.get_dummies(df,columns=["Firma","Konum","Pozisyon","çalışma şekli"],drop_first=True)
-
 # Özellikler ve hedef değişkeni ayarla
-y = df[['Tarih']]  # 'Tarih' sütunu bağımsız değişken
-X= df.drop(columns=["Tarih"])  # 'Pozisyon' sütunu hedef değişken
+X = df[['Tarih']]  # 'Tarih' sütunu bağımsız değişken
+y = df['Pozisyon']  # 'Pozisyon' sütunu hedef değişken
 
 # Eğitim ve test verilerine ayır
 X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
@@ -207,7 +205,13 @@ if st.button("Tahmin Et!!"):
         st.success("Doğru Tahmin!")
     else:
         st.error("Yanlış Tahmin!")
-   
+        
+# Eğitim ve test verisi doğruluk puanları
+if st.button("Eğitim ve Test Verisi Doğruluk Puanı:"):
+    st.markdown('<div style="color: red;">Eğitim verisi doğruluk puanı:</div>', unsafe_allow_html=True)
+    st.markdown(f'<div style="color: red;">{train_accuracy}</div>', unsafe_allow_html=True)
+    st.markdown('<div style="color: red;">Test verisi doğruluk puanı:</div>', unsafe_allow_html=True)
+    st.markdown(f'<div style="color: red;">{test_accuracy}</div>', unsafe_allow_html=True) 
     
 # Meslek Grupları butonunun durumunu takip eden bir oturum durumu (session state) belirle
 if 'meslek_gruplari_acik' not in st.session_state:
@@ -258,6 +262,18 @@ if st.session_state.meslek_gruplari_acik:
 
     st.markdown('</div>', unsafe_allow_html=True)
 
+if st.button("Türkiye'nin Geldiği Son Nokta", key="son_nokta_button"):
+    st.markdown('<div class="content-box">', unsafe_allow_html=True)
+    st.markdown('<h2 class="subtitle">Türkiye\'nin Geldiği Son Nokta</h2>', unsafe_allow_html=True)
+    st.markdown('<p>Burada Türkiye\'nin geldiği son noktayla ilgili bilgiler yer alacak.</p>', unsafe_allow_html=True)
+    st.markdown('</div>', unsafe_allow_html=True)
+
+if st.button("Analiz"):
+    st.markdown('<div class="content-box">', unsafe_allow_html=True)
+    st.markdown('<h2 class="subtitle">Analiz</h2>', unsafe_allow_html=True)
+    st.markdown('<p>Burada veri analizi işlevi gelecek.</p>', unsafe_allow_html=True)
+    st.markdown('</div>', unsafe_allow_html=True)
+    
 if st.button("Grafikler"):
     st.markdown('<div class="content-box">', unsafe_allow_html=True)
     st.markdown('<h2 class="subtitle">Grafikler</h2>', unsafe_allow_html=True)
@@ -336,7 +352,20 @@ if st.button("Grafikler"):
     plt.ylabel('Konum')
     st.pyplot(plt)
 
+# Makale 1
+if st.button("Makale 1"):
+    st.markdown('<div style="background-color: #9b59b6; padding: 20px; border-radius: 10px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);"><h3 style="color: #f4d03f;">Başlık 1</h3><p style="color: #f4d03f;">Burada makale içeriği yer alacak.</p></div>', unsafe_allow_html=True)
 
+# Makale 2
+if st.button("Makale 2"):
+    st.markdown('<div style="background-color: #9b59b6; padding: 20px; border-radius: 10px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);"><h3 style="color: #f4d03f;">Başlık 2</h3><p style="color: #f4d03f;">Burada makale içeriği yer alacak.</p></div>', unsafe_allow_html=True)
+
+# Hakkımızda bölümü
+if st.button("Hakkımızda"):
+    st.markdown('''
+    ## Bilişim Sektöründe Gelecek: Veri Analizi ve İş İlanları
+    ...
+    ''')
 
 # Footer
 st.markdown('<div class="content-box">', unsafe_allow_html=True)
