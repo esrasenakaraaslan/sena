@@ -162,8 +162,6 @@ model.fit(X_train, y_train)
 # Modelin performansını değerlendir
 train_accuracy = model.score(X_train, y_train)
 test_accuracy = model.score(X_test, y_test)
-st.write("Eğitim verisi doğruluk puanı:", train_accuracy)
-st.write("Test verisi doğruluk puanı:", test_accuracy)
 
 # Eğitilmiş modeli kaydet
 joblib.dump(model, "model.joblib")
