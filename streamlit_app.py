@@ -256,18 +256,6 @@ if st.session_state.meslek_gruplari_acik:
 
     st.markdown('</div>', unsafe_allow_html=True)
 
-if st.button("Türkiye'nin Geldiği Son Nokta", key="son_nokta_button"):
-    st.markdown('<div class="content-box">', unsafe_allow_html=True)
-    st.markdown('<h2 class="subtitle">Türkiye\'nin Geldiği Son Nokta</h2>', unsafe_allow_html=True)
-    st.markdown('<p>Burada Türkiye\'nin geldiği son noktayla ilgili bilgiler yer alacak.</p>', unsafe_allow_html=True)
-    st.markdown('</div>', unsafe_allow_html=True)
-
-if st.button("Analiz"):
-    st.markdown('<div class="content-box">', unsafe_allow_html=True)
-    st.markdown('<h2 class="subtitle">Analiz</h2>', unsafe_allow_html=True)
-    st.markdown('<p>Burada veri analizi işlevi gelecek.</p>', unsafe_allow_html=True)
-    st.markdown('</div>', unsafe_allow_html=True)
-    
 if st.button("Grafikler"):
     st.markdown('<div class="content-box">', unsafe_allow_html=True)
     st.markdown('<h2 class="subtitle">Grafikler</h2>', unsafe_allow_html=True)
@@ -346,20 +334,7 @@ if st.button("Grafikler"):
     plt.ylabel('Konum')
     st.pyplot(plt)
 
-# Makale 1
-"""if st.button("Makale 1"):
-    st.markdown('<div style="background-color: #9b59b6; padding: 20px; border-radius: 10px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);"><h3 style="color: #f4d03f;">Başlık 1</h3><p style="color: #f4d03f;">Burada makale içeriği yer alacak.</p></div>', unsafe_allow_html=True)
 
-# Makale 2
-if st.button("Makale 2"):
-    st.markdown('<div style="background-color: #9b59b6; padding: 20px; border-radius: 10px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);"><h3 style="color: #f4d03f;">Başlık 2</h3><p style="color: #f4d03f;">Burada makale içeriği yer alacak.</p></div>', unsafe_allow_html=True)
-"""
-# Hakkımızda bölümü
-if st.button("Hakkımızda"):
-    st.markdown('''
-    ## Bilişim Sektöründe Gelecek: Veri Analizi ve İş İlanları
-    ...
-    ''')
 
 # Footer
 st.markdown('<div class="content-box">', unsafe_allow_html=True)
