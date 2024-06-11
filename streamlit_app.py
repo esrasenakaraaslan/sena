@@ -213,7 +213,6 @@ if st.button("Eğitim ve Test Verisi Doğruluk Puanı Göster"):
         st.markdown(f'<div style="color: red;">Test verisi doğruluk puanı: {test_accuracy}</div>', unsafe_allow_html=True)
 
 
-
 # Meslek Grupları butonunun durumunu takip eden bir oturum durumu (session state) belirle
 if 'meslek_gruplari_acik' not in st.session_state:
     st.session_state.meslek_gruplari_acik = False
