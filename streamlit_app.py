@@ -148,9 +148,11 @@ df = df[df['Tarih'] != 'DIGITURK']
 # Tarih sütununu uygun bir tarih veri tipine dönüştürme
 df['Tarih'] = pd.to_datetime(df['Tarih'], format='%d/%m/%Y', errors='coerce')
 
+df=pd.get_dummies(df,columns=["Firma","Konum","Pozisyon","çalışma şekli"],drop_first=True)
+
 # Özellikler ve hedef değişkeni ayarla
-X = df[['Tarih']]  # 'Tarih' sütunu bağımsız değişken
-y = df['Pozisyon']  # 'Pozisyon' sütunu hedef değişken
+y = df[['Tarih']]  # 'Tarih' sütunu bağımsız değişken
+X= df.drop(columns=["Tarih"])  # 'Pozisyon' sütunu hedef değişken
 
 # Eğitim ve test verilerine ayır
 X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
